@@ -11,7 +11,10 @@
   "dependencies": {
     "@nuxtjs/axios": "^5.12.5",
     "core-js": "^3.8.3",
-    "nuxt": "^2.14.12"
+    "nuxt": "^2.14.12",
+    "v-owl-carousel": "^1.0.8"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "@nuxt/types": "~2.15.0"
+  }
 }
