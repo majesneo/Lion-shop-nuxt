@@ -1,7 +1,7 @@
 <template>
-  <header class="header">
+  <header class="header header-7">
     <div class="header-top">
-      <div class="container">
+      <div class="container-fluid">
         <div class="header-left">
           <div class="header-dropdown">
             <a href="#">Usd</a>
@@ -31,7 +31,7 @@
               <a href="#">Links</a>
               <ul>
                 <li><a href="tel:#"><i class="icon-phone"></i>Call: +0123 456 789</a></li>
-                <li><a href="wishlist.html"><i class="icon-heart-o"></i>Wishlist <span>(3)</span></a></li>
+                <li><a href="wishlist.html"><i class="icon-heart-o"></i>My Wishlist <span>(3)</span></a></li>
                 <li><a href="about.html">About Us</a></li>
                 <li><a href="contact.html">Contact Us</a></li>
                 <li><a href="#signin-modal" data-toggle="modal"><i class="icon-user"></i>Login</a></li>
@@ -39,11 +39,11 @@
             </li>
           </ul><!-- End .top-menu -->
         </div><!-- End .header-right -->
-      </div><!-- End .container -->
+      </div><!-- End .container-fluid -->
     </div><!-- End .header-top -->
 
     <div class="header-middle sticky-header">
-      <div class="container">
+      <div class="container-fluid">
         <div class="header-left">
           <button class="mobile-menu-toggler">
             <span class="sr-only">Toggle mobile menu</span>
@@ -51,7 +51,7 @@
           </button>
 
           <a href="index.html" class="logo">
-            <img src="assets/images/logo.png" alt="Molla Logo" width="105" height="25">
+            <img src="assets/images/demos/demo-7/logo.png" alt="Molla Logo" width="105" height="25">
           </a>
 
           <nav class="main-nav">
@@ -60,7 +60,7 @@
                 <nuxt-link to="/" class="sf-with-ul">Home</nuxt-link>
               </li>
               <li>
-                <a href="category.html" class="sf-with-ul">Shop</a>
+                <nuxt-link to="/admin" class="sf-with-ul">Admin</nuxt-link>
                 <div class="megamenu megamenu-md">
                   <div class="row no-gutters">
                     <div class="col-md-8">
@@ -111,8 +111,8 @@
                           <img src="assets/images/menu/banner-1.jpg" alt="Banner">
 
                           <div class="banner-content banner-content-top">
-                            <div class="banner-title text-white">Last <br>Chance<br><span><strong>Sale</strong></span>
-                            </div><!-- End .banner-title -->
+                            <div class="banner-title text-white">Last
+                              <br>Chance<br><span><strong>Sale</strong></span></div><!-- End .banner-title -->
                           </div><!-- End .banner-content -->
                         </a>
                       </div><!-- End .banner banner-overlay -->
@@ -121,7 +121,7 @@
                 </div><!-- End .megamenu megamenu-md -->
               </li>
               <li>
-                <a href="product.html" class="sf-with-ul">Product</a>
+                <nuxt-link to="/product" class="sf-with-ul">Product</nuxt-link>
 
                 <div class="megamenu megamenu-sm">
                   <div class="row no-gutters">
@@ -148,8 +148,8 @@
                           <img src="assets/images/menu/banner-2.jpg" alt="Banner">
 
                           <div class="banner-content banner-content-bottom">
-                            <div class="banner-title text-white">New Trends<br><span><strong>spring 2019</strong></span>
-                            </div><!-- End .banner-title -->
+                            <div class="banner-title text-white">New
+                              Trends<br><span><strong>spring 2019</strong></span></div><!-- End .banner-title -->
                           </div><!-- End .banner-content -->
                         </a>
                       </div><!-- End .banner -->
@@ -184,7 +184,7 @@
                 </ul>
               </li>
               <li>
-                <nuxt-link to="/blog" class="sf-with-ul">Blog</nuxt-link>
+                <nuxt-link to="/post" class="sf-with-ul">Posts</nuxt-link>
 
                 <ul>
                   <li><a href="blog.html">Classic</a></li>
@@ -249,39 +249,16 @@
         </div><!-- End .header-left -->
 
         <div class="header-right">
-          <div class="header-search">
-            <a href="#" class="search-toggle" role="button" title="Search"><i class="icon-search"></i></a>
+          <div class="header-search header-search-extended header-search-visible">
+            <a href="#" class="search-toggle" role="button"><i class="icon-search"></i></a>
             <form action="#" method="get">
-              <div class="header-search-wrapper">
+              <div class="header-search-wrapper search-wrapper-wide">
                 <label for="q" class="sr-only">Search</label>
-                <input type="search" class="form-control" name="q" id="q" placeholder="Search in..." required>
+                <input type="search" class="form-control" name="q" id="q" placeholder="Search product ..." required>
+                <button class="btn btn-primary" type="submit"><i class="icon-search"></i></button>
               </div><!-- End .header-search-wrapper -->
             </form>
           </div><!-- End .header-search -->
-          <div class="dropdown compare-dropdown">
-            <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true"
-               aria-expanded="false" data-display="static" title="Compare Products" aria-label="Compare Products">
-              <i class="icon-random"></i>
-            </a>
-
-            <div class="dropdown-menu dropdown-menu-right">
-              <ul class="compare-products">
-                <li class="compare-product">
-                  <a href="#" class="btn-remove" title="Remove Product"><i class="icon-close"></i></a>
-                  <h4 class="compare-product-title"><a href="product.html">Blue Night Dress</a></h4>
-                </li>
-                <li class="compare-product">
-                  <a href="#" class="btn-remove" title="Remove Product"><i class="icon-close"></i></a>
-                  <h4 class="compare-product-title"><a href="product.html">White Long Skirt</a></h4>
-                </li>
-              </ul>
-
-              <div class="compare-actions">
-                <a href="#" class="action-link">Clear All</a>
-                <a href="#" class="btn btn-outline-primary-2"><span>Compare</span><i class="icon-long-arrow-right"></i></a>
-              </div>
-            </div><!-- End .dropdown-menu -->
-          </div><!-- End .compare-dropdown -->
 
           <div class="dropdown cart-dropdown">
             <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true"
@@ -347,7 +324,7 @@
             </div><!-- End .dropdown-menu -->
           </div><!-- End .cart-dropdown -->
         </div><!-- End .header-right -->
-      </div><!-- End .container -->
+      </div><!-- End .container-fluid -->
     </div><!-- End .header-middle -->
   </header>
 </template>

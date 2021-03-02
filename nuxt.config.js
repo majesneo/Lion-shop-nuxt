@@ -17,14 +17,17 @@ export default {
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
-    '@/assets/css/style.css',
-    '@/assets/css/bootstrap.min.css',
+    '@/node_modules/bootstrap/dist/css/bootstrap.css',
+    '@/node_modules/bootstrap-vue/dist/bootstrap-vue.css',
     '@/assets/css/line-awesome.min.css',
+    '@/assets/css/style.css',
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    {src: 'plugins/owl.js', ssr: false}
+    {src: 'plugins/owl.js', ssr: false},
+    '@/plugins/vuelidate',
+    '@/plugins/bootstrap'
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
