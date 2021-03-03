@@ -13,7 +13,7 @@
           <span class="text-danger"
                 v-if="$v.username.$dirty && !$v.username.required">Username is required</span>
           <label for="singin-email-2">Username *</label>
-          <input v-model="$v.username.$model"
+          <input v-model.trim="$v.username.$model"
                  type="text" class="form-control"
                  id="singin-email-2"
                  name="singin-email">
@@ -23,7 +23,7 @@
           <span class="text-danger"
                 v-if="$v.password.$dirty && !$v.password.required">Password is required</span>
           <label for="singin-password-2">Password *</label>
-          <input v-model="$v.password.$model"
+          <input v-model.trim="$v.password.$model"
                  type="password"
                  class="form-control"
                  id="singin-password-2"
@@ -54,11 +54,13 @@
 
 <script>
 import {required} from "vuelidate/lib/validators";
+import mixinToast from "@/mixins/mixinToast";
 
 export default {
   name: "users",
   layout: "admin",
   middleware: "auth-admin",
+  mixins: [mixinToast],
   data() {
     return {
       username: '',
@@ -76,8 +78,8 @@ export default {
   },
   methods: {
     async onSubmit() {
-      this.$v.$touch()
       if (this.$v.$invalid) {
+        this.$v.$touch()
         this.busy = true
         new Promise((resolve) => setTimeout(() => {
           resolve(this.busy = false)
@@ -90,29 +92,22 @@ export default {
           password: this.password,
         }
         try {
-
           await this.$store.dispatch('auth-admin/createUser', formData)
-          const message = "User created"
-          this.makeToast('b-toaster-top-center', 'success', message)
+          this.$v.$reset()
           this.username = ''
           this.password = ''
+          const message = "User created"
+          this.makeToast('b-toaster-top-center', 'success', message)
+
         } catch (e) {
 
         } finally {
           new Promise((resolve) => setTimeout(() => {
-            resolve(this.busy = false)
+            resolve(this.busy = false,)
           }, 2000))
         }
       }
     },
-    makeToast(toaster, variant = null, message) {
-      this.$bvToast.toast([message], {
-        toaster,
-        title: `${variant}`,
-        variant: variant,
-        solid: true
-      })
-    }
   },
 
 }

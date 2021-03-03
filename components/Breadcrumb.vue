@@ -1,13 +1,20 @@
 <template>
-  <nav aria-label="breadcrumb" class="breadcrumb-nav mb-2">
-    <div class="container">
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-        <li class="breadcrumb-item"><a href="#">Shop</a></li>
-        <li class="breadcrumb-item active" aria-current="page">List</li>
-      </ol>
-    </div>
-  </nav>
+  <b-breadcrumb>
+    <b-breadcrumb-item to="/admin/list/post">Post</b-breadcrumb-item>
+    <b-breadcrumb-item to="">{{ $route.params.id }}</b-breadcrumb-item>
+  </b-breadcrumb>
+  <!--  <nav aria-label="breadcrumb" class="breadcrumb-nav">
+      <div class="container">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <nuxt-link to="/admin/list/post">Post</nuxt-link>
+          </li>
+          <li class="breadcrumb-item">
+            <nuxt-link to="">{{ $route.params.id }}</nuxt-link>
+          </li>
+        </ol>
+      </div>
+    </nav>-->
 </template>
 
 <script>

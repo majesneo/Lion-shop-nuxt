@@ -5,7 +5,7 @@ export default {
         toaster,
         title: `${variant}`,
         variant: variant,
-        solid: true
+        solid: true,
       })
     },
   }

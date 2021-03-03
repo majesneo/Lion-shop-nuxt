@@ -4,6 +4,7 @@
       <app-aside/>
     </b-col>
     <b-col md="10">
+
       <nuxt/>
     </b-col>
   </b-row>

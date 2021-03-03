@@ -223,8 +223,8 @@
 
           <h3 class="title">3 Comments</h3><!-- End .title -->
 
-          <app-blog-comment/>
-          <app-blog-comment-form @commentCreated="commentCreated"/>
+          <app-post-comment/>
+          <app-post-comment-form @commentCreated="commentCreated"/>
 
         </div><!-- End .col-lg-9 -->
 
@@ -338,24 +338,24 @@
               <div class="widget-text-content">
                 <p>Vestibulum volutpat, lacus a ultrices sagittis, mi neque euismod dui, pulvinar nunc sapien ornare
                   nisl.</p>
-              </div><!-- End .widget-text-content -->
-            </div><!-- End .widget -->
-          </div><!-- End .sidebar sidebar-shop -->
-        </aside><!-- End .col-lg-3 -->
-      </div><!-- End .row -->
-    </div><!-- End .container -->
+              </div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import AppBlogComment from "@/components/Post/PostComment";
-import AppBlogCommentForm from "@/components/Post/PostCommentForm";
+import AppPostComment from "@/components/Post/PostComment";
+import AppPostCommentForm from "@/components/Post/PostCommentForm";
 
 export default {
   name: "id",
   components: {
-    AppBlogComment,
-    AppBlogCommentForm
+    AppPostComment,
+    AppPostCommentForm
   },
   validate({params}) {
     return Boolean(params.id)
@@ -364,7 +364,8 @@ export default {
     commentCreated() {
 
     }
-  }
+  },
+
 }
 </script>
 

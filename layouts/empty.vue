@@ -3,28 +3,22 @@
 </template>
 
 <script>
+import mixinToast from "@/mixins/mixinToast";
+
 export default {
   name: "empty",
+  mixins: [mixinToast],
   computed: {
     error() {
       return this.$store.getters.error
     }
   },
   watch: {
-    error(value) {
-      this.makeToast('b-toaster-top-center', 'danger', value)
+    error(message) {
+      this.makeToast('b-toaster-top-center', 'danger', message)
     }
   },
-  methods: {
-    makeToast(toaster, variant = null, message) {
-      this.$bvToast.toast([message], {
-        toaster,
-        title: `${variant}`,
-        variant: variant,
-        solid: true
-      })
-    }
-  }
+
 }
 </script>
 

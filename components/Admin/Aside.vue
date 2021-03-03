@@ -13,7 +13,7 @@
       <b-dropdown-item to="/admin/create/post">Post</b-dropdown-item>
     </b-nav-item>
     <b-nav-item to="/admin/list">
-      <b-icon icon="card-list"></b-icon>
+      <b-icon icon="bar-chart"></b-icon>
       List
       <b-dropdown-item to="/admin/list/products">Products</b-dropdown-item>
       <b-dropdown-item to="/admin/list/post">Post</b-dropdown-item>
