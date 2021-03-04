@@ -1,3 +1,5 @@
+import login from "@/pages/admin/login";
+
 const posts = [
   {
     title: 'Cras ornare tristique elit',
@@ -54,24 +56,33 @@ export const actions = {
     }
   },
   async getPostById({}, id) {
-    return new Promise((resolve) => {
+    return await new Promise((resolve) => {
       setTimeout(() => {
         resolve(posts.find(post => post._id === id))
       }, 1000)
     })
   },
   async updatePost({}, {id, text}) {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve()
-      }, 1000)
-    })
+    try {
+      return await new Promise((resolve) => {
+        setTimeout(() => {
+          resolve()
+        }, 1000)
+      })
+    } catch (e) {
+
+    }
   },
-  async createPost({}, {title, description}) {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve()
-      }, 1000)
-    })
+  async createPost({commit}, formData) {
+    try {
+      return await new Promise((resolve) => {
+        setTimeout(() => {
+          resolve()
+        }, 1000)
+      })
+    } catch (e) {
+      commit('setError', e, {root: true})
+      throw e
+    }
   }
 }

@@ -15,6 +15,7 @@ export default {
     ]
   },
 
+  target: 'server',
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
     '@/node_modules/bootstrap/dist/css/bootstrap.css',
@@ -36,6 +37,9 @@ export default {
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [],
 
+  serverMiddleware: {
+    '/server': '~/server'
+  },
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     // https://go.nuxtjs.dev/axios

@@ -21,7 +21,10 @@
             <!-- <b-img thumbnail fluid src="https://picsum.photos/250/250/?image=54" alt="Image 1"></b-img>-->
           </b-col>
         </b-row>
-        <b-form-file class="mt-2" multiple>
+        <b-form-file ref="file-input"
+                     v-model="images"
+                     accept=".jpg, .png, .gif"
+                     class="mt-2" multiple>
           <template slot="file-name" slot-scope="{ names }">
             <b-badge variant="dark">{{ names[0] }}</b-badge>
             <b-badge v-if="names.length > 1" variant="dark" class="ml-1">
@@ -64,6 +67,7 @@
       <b-modal id="modal-1" title="Post preview">
         {{ title }}
         {{ description }}
+
       </b-modal>
     </b-form>
   </div>
@@ -82,31 +86,47 @@ export default {
     return {
       title: '',
       description: '',
-      busy: false
+      busy: false,
+      images: null
     }
   },
   methods: {
     async onSubmit() {
-      if (this.$v.$invalid) {
-        this.$v.$touch()
-      } else {
+      if (!this.$v.$invalid && this.images.length !== 0) {
         this.busy = true
-        const formData = {
-          title: this.title,
-          description: this.description,
-        }
         try {
+          const formData = new FormData()
+          formData.append('title', this.title)
+          formData.append('description', this.description)
+          Object.values(this.images).forEach(function (file, index) {
+            index = file.name
+            formData.append(index, file);
+          });
           await this.$store.dispatch('posts/createPost', formData)
+          this.$v.$reset()
+          this.$refs['file-input'].reset()
+          this.title = ''
+          this.description = ''
           const message = "Post created"
           this.makeToast('b-toaster-top-center', 'success', message)
 
         } catch (e) {
-
+          console.log(e)
         } finally {
           this.busy = false
         }
+      } else {
+        this.$v.$touch()
+        const message = "The form is not valid"
+        this.makeToast('b-toaster-top-center', 'danger', message)
       }
     },
+    handleImageChange(files) {
+      files.forEach(file => {
+        this.images.push(file)
+
+      })
+    }
   },
   validations: {
     title: {
