@@ -1,4 +1,7 @@
 export default {
+
+  target: 'server',
+
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'Lion-shop',
@@ -15,7 +18,7 @@ export default {
     ]
   },
 
-  target: 'server',
+
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
     '@/node_modules/bootstrap/dist/css/bootstrap.css',
@@ -38,7 +41,7 @@ export default {
   buildModules: [],
 
   serverMiddleware: {
-    '/server': '~/server'
+    '/api': '~/api'
   },
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [

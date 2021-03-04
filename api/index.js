@@ -2,10 +2,12 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const authRoutes = require('./routes/auth.routes')
 const mongoose = require('mongoose')
+const passport = require('passport')
+const passportStrategy = require('./middleware/passport-strategy')
 const keys = require('./keys')
+
 const app = express()
 
-module.exports = app
 
 mongoose.connect(keys.MONGO_URL, {
   useNewUrlParser: true,
@@ -16,14 +18,19 @@ mongoose.connect(keys.MONGO_URL, {
   .then(() => console.log('MONGO CONNECTED'))
   .catch(error => console.log(error))
 
+app.use(passport.initialize())
+passport.use(passportStrategy)
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
-app.use('/api/auth', authRoutes)
+app.use(authRoutes)
 
 
+module.exports = app
 if (require.main === module) {
   const port = process.env.PORT || 3001
+  console.log(123455)
   app.listen(port, () => {
+    // eslint-disable-next-line no-console
     console.log(`API server listening on port ${port}`)
   })
 }
