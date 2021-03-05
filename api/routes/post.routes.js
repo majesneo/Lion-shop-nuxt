@@ -6,14 +6,14 @@ const upload = require('../middleware/upload')
 
 // Admin
 router.post(
-  '/admin/',
+  '/admin',
   passport.authenticate('jwt', { session: false }),
   upload.single('image'),
   postController.create
 )
 
 router.get(
-  '/admin/',
+  '/admin',
   passport.authenticate('jwt', { session: false }),
   postController.getAll
 )

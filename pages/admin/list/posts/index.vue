@@ -77,13 +77,13 @@ export default {
   },
   methods: {
     openPost (id) {
-      this.$router.push(`/admin/post/${id}`)
+      this.$router.push(`/admin/list/posts/${id}`)
     },
     async removePost (id) {
       try {
         await this.confirm('Attention', 'Are you sure you want to delete the post?')
         await this.$store.dispatch('posts/removePost', id)
-        this.posts = this.posts.filter(post => post._id !== id)
+        this.posts = this.posts.filter(post => index._id !== id)
         const message = 'Post deleted'
         this.makeToast('b-toaster-top-center', 'success', message)
       } catch (e) {

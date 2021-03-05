@@ -18,7 +18,7 @@
           <label for="singin-email-2">Username *</label>
           <input
             id="singin-email-2"
-            v-model="$v.formData.username.$model"
+            v-model="$v.username.$model"
             type="text"
             class="form-control"
             name="singin-email"
@@ -36,7 +36,7 @@
           <label for="singin-password-2">Password *</label>
           <input
             id="singin-password-2"
-            v-model="$v.formData.password.$model"
+            v-model="$v.password.$model"
             type="password"
             class="form-control"
             name="singin-password"
@@ -83,10 +83,8 @@ export default {
   mixins: [mixinToast],
   data () {
     return {
-      formData: {
-        username: '',
-        password: ''
-      },
+      username: '',
+      password: '',
       busy: false
     }
   },
@@ -108,8 +106,8 @@ export default {
       if (!this.$v.$invalid) {
         this.busy = true
         try {
-          console.log(this.formData)
-          await this.$store.dispatch('auth-admin/login', this.formData)
+          const dataForm = this.getFormData()
+          await this.$store.dispatch('auth-admin/login', dataForm)
           await this.$router.push('/admin')
         } catch (e) {
 
@@ -119,10 +117,16 @@ export default {
         }
       }
     },
+    getFormData () {
+      return {
+        login: this.username,
+        password: this.password
+      }
+    },
     cleaningForm () {
       this.$v.$reset()
-      this.formData.username = ''
-      this.formData.password = ''
+      this.username = ''
+      this.password = ''
     },
     checkQuery (query) {
       switch (query) {

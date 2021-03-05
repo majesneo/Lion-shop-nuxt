@@ -114,14 +114,16 @@ export default {
   },
   methods: {
     async onSubmit () {
+      this.$v.$touch()
       if (!this.$v.$invalid && this.images.length !== 0) {
-        this.busy = true
         try {
+          this.busy = true
           const formData = new FormData()
           console.log(this.images)
           formData.append('title', this.title)
           formData.append('description', this.description)
           formData.append('image', this.images)
+          this.images.forEach(data => console.log(data))
           await this.$store.dispatch('posts/createPost', formData)
           this.$v.$reset()
           this.$refs['file-input'].reset()
@@ -131,6 +133,7 @@ export default {
           this.makeToast('b-toaster-top-center', 'success', message)
         } catch (e) {
           console.log(e)
+          this.busy = false
         } finally {
           this.busy = false
         }
@@ -138,12 +141,8 @@ export default {
         this.$v.$touch()
         const message = 'The form is not valid'
         this.makeToast('b-toaster-top-center', 'danger', message)
+        this.busy = false
       }
-    },
-    handleImageChange (files) {
-      files.forEach((file) => {
-        this.images.push(file)
-      })
     }
   },
   validations: {

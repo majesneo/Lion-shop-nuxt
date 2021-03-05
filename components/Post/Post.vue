@@ -18,7 +18,7 @@
         <div class="entry-item lifestyle shopping col-sm-6 col-lg-4">
           <article class="entry entry-mask">
             <figure class="entry-media">
-              <a href="#" @click.prevent="showBlogPost">
+              <a href="#" @click.prevent="showPost">
                 <img src="assets/images/blog/mask/grid/post-1.jpg" alt="image desc">
               </a>
             </figure>
@@ -288,7 +288,7 @@ export default {
     /* AppPagination */
   },
   methods: {
-    showBlogPost () {
+    showPost () {
       const id = 'test-id'
       this.$router.push(`/post/${id}`)
     }

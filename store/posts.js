@@ -74,11 +74,8 @@ export const actions = {
   },
   async createPost ({ commit }, formData) {
     try {
-      return await new Promise((resolve) => {
-        setTimeout(() => {
-          resolve()
-        }, 1000)
-      })
+      const res = await this.$axios.$post('/api/post/admin', formData)
+      console.log(res)
     } catch (e) {
       commit('setError', e, { root: true })
       throw e

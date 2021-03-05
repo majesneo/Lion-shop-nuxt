@@ -24,8 +24,8 @@ passport.use(passportStrategy)
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
-app.use(postRoutes)
-app.use(authRoutes)
+app.use('/post', postRoutes)
+app.use('/auth', authRoutes)
 app.use(commentRoutes)
 
 module.exports = app

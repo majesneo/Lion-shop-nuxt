@@ -1,12 +1,12 @@
 <template>
   <b-nav class="menu admin-menu">
-    <b-nav-item to="/admin">
+    <b-nav-item active to="/admin/analytics">
       <b-icon icon="bar-chart" />
       Analytics
-      <b-dropdown-item to="/admin/products">
+      <b-dropdown-item to="/admin/analytics/products">
         Products
       </b-dropdown-item>
-      <b-dropdown-item to="/admin/post">
+      <b-dropdown-item to="/admin/analytics/posts">
         Post
       </b-dropdown-item>
     </b-nav-item>
@@ -26,7 +26,7 @@
       <b-dropdown-item to="/admin/list/products">
         Products
       </b-dropdown-item>
-      <b-dropdown-item to="/admin/list/post">
+      <b-dropdown-item to="/admin/list/posts">
         Post
       </b-dropdown-item>
     </b-nav-item>
@@ -43,7 +43,9 @@
 
 <script>
 export default {
-  name: 'Aside'
+  name: 'Aside',
+  methods: {
+  }
 }
 </script>
 

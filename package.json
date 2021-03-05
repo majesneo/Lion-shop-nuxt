@@ -26,6 +26,8 @@
     "nuxt": "^2.14.12",
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
+    "tiptap": "^1.32.1",
+    "tiptap-extensions": "^1.35.1",
     "v-owl-carousel": "^1.0.8",
     "vue": "^2.6.12",
     "vuelidate": "^0.7.6"

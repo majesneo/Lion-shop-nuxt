@@ -97,11 +97,11 @@ export default {
         this.busy = true
       } else {
         this.busy = true
-        const formData = {
+        /* const formData = {
           name: this.name,
           comment: this.comment,
           postId: ''
-        }
+        } */
         try {
           this.$emit('commentCreated')
         } catch (e) {
