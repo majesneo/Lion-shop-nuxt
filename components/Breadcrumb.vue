@@ -1,7 +1,11 @@
 <template>
   <b-breadcrumb>
-    <b-breadcrumb-item to="/admin/list/post">Post</b-breadcrumb-item>
-    <b-breadcrumb-item to="">{{ $route.params.id }}</b-breadcrumb-item>
+    <b-breadcrumb-item to="/admin/list/post">
+      Post
+    </b-breadcrumb-item>
+    <b-breadcrumb-item to="">
+      {{ $route.params.id }}
+    </b-breadcrumb-item>
   </b-breadcrumb>
   <!--  <nav aria-label="breadcrumb" class="breadcrumb-nav">
       <div class="container">
@@ -19,7 +23,7 @@
 
 <script>
 export default {
-  name: "Breadcrumb"
+  name: 'Breadcrumb'
 }
 </script>
 

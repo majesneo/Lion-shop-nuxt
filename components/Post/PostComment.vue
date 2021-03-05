@@ -17,8 +17,10 @@
             </div><!-- End .comment-user -->
 
             <div class="comment-content">
-              <p>Sed pretium, ligula sollicitudin laoreet viverra, tortor libero sodales leo, eget blandit nunc
-                tortor eu nibh. Nullam mollis. Ut justo. Suspendisse potenti. </p>
+              <p>
+                Sed pretium, ligula sollicitudin laoreet viverra, tortor libero sodales leo, eget blandit nunc
+                tortor eu nibh. Nullam mollis. Ut justo. Suspendisse potenti.
+              </p>
             </div><!-- End .comment-content -->
           </div><!-- End .comment-body -->
         </div><!-- End .comment -->
@@ -64,8 +66,10 @@
             </div><!-- End .comment-user -->
 
             <div class="comment-content">
-              <p>Vestibulum volutpat, lacus a ultrices sagittis, mi neque euismod dui, eu pulvinar nunc sapien
-                ornare nisl. Phasellus pede arcu, dapibus eu, fermentum et, dapibus sed, urna.</p>
+              <p>
+                Vestibulum volutpat, lacus a ultrices sagittis, mi neque euismod dui, eu pulvinar nunc sapien
+                ornare nisl. Phasellus pede arcu, dapibus eu, fermentum et, dapibus sed, urna.
+              </p>
             </div><!-- End .comment-content -->
           </div><!-- End .comment-body -->
         </div><!-- End .comment -->
@@ -76,7 +80,7 @@
 
 <script>
 export default {
-  name: "BlogPostComment"
+  name: 'BlogPostComment'
 }
 </script>
 

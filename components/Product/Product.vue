@@ -5,7 +5,7 @@
         <div class="col-6 col-lg-3">
           <figure class="product-media">
             <span class="product-label label-new">New</span>
-            <a @click.prevent="showProduct" href="#">
+            <a href="#" @click.prevent="showProduct">
               <img src="../../assets/images/products/product-4.jpg" alt="Product image" class="product-image">
             </a>
           </figure><!-- End .product-media -->
@@ -18,14 +18,17 @@
             </div><!-- End .product-price -->
             <div class="ratings-container">
               <div class="ratings">
-                <div class="ratings-val" style="width: 20%;"></div><!-- End .ratings-val -->
+                <div class="ratings-val" style="width: 20%;" /><!-- End .ratings-val -->
               </div><!-- End .ratings -->
               <span class="ratings-text">( 2 Reviews )</span>
             </div><!-- End .rating-container -->
 
             <div class="product-action">
-              <a href="popup/quickView.html" class="btn-product btn-quickview"
-                 title="Quick view"><span>quick view</span></a>
+              <a
+                href="popup/quickView.html"
+                class="btn-product btn-quickview"
+                title="Quick view"
+              ><span>quick view</span></a>
               <a href="#" class="btn-product btn-compare" title="Compare"><span>compare</span></a>
             </div><!-- End .product-action -->
 
@@ -39,7 +42,9 @@
             <div class="product-cat">
               <a href="#">Women</a>
             </div><!-- End .product-cat -->
-            <h3 class="product-title"><a href="product.html">Brown paperbag waist pencil skirt</a></h3>
+            <h3 class="product-title">
+              <a href="product.html">Brown paperbag waist pencil skirt</a>
+            </h3>
             <!-- End .product-title -->
 
             <div class="product-content">
@@ -67,9 +72,9 @@
 
 <script>
 export default {
-  name: "Product",
+  name: 'Product',
   methods: {
-    showProduct() {
+    showProduct () {
       const id = 'test-id'
       this.$router.push(`/product/${id}`)
     }

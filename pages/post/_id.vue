@@ -29,27 +29,29 @@
               </div><!-- End .entry-cats -->
 
               <div class="entry-content editor-content">
-                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendrerit. Pellentesque aliquet
+                <p>
+                  Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendrerit. Pellentesque aliquet
                   nibh nec urna. In nisi neque, aliquet vel, dapibus id, mattis vel, nisi. Sed pretium, ligula
                   sollicitudin laoreet viverra, tortor libero sodales leo, eget blandit nunc tortor eu nibh. Nullam
-                  mollis. Ut justo. Suspendisse potenti.</p>
+                  mollis. Ut justo. Suspendisse potenti.
+                </p>
 
+                <div class="pb-1 clearfix" /><!-- End .clearfix -->
 
-                <div class="pb-1 clearfix"></div><!-- End .clearfix -->
-
-
-                <div class="pb-1"></div><!-- End .pb-1 -->
+                <div class="pb-1" /><!-- End .pb-1 -->
 
                 <h3>Morbi interdum mollis sapien.</h3>
 
                 <img src="assets/images/blog/single/3.jpg" alt="image">
 
-                <p>Sed pretium, ligula sollicitudin laoreet viverra, tortor libero sodales leo, eget blandit nunc tortor
+                <p>
+                  Sed pretium, ligula sollicitudin laoreet viverra, tortor libero sodales leo, eget blandit nunc tortor
                   eu nibh. Nullam mollis. Ut justo. Suspendisse potenti. Sed egestas, ante et vulputate volutpat, eros
                   pede semper est, vitae luctus metus libero eu augue. Morbi purus libero, faucibus adipiscing, commodo
                   quis, gravida id, est. Sed lectus. Praesent <a href="#">elementum hendrerit</a> tortor. Sed semper
                   lorem at felis. Vestibulum volutpat, lacus a ultrices sagittis, mi neque euismod dui, eu pulvinar nunc
-                  sapien ornare nisl. Phasellus pede arcu, dapibus eu, fermentum et, dapibus sed, urna.</p>
+                  sapien ornare nisl. Phasellus pede arcu, dapibus eu, fermentum et, dapibus sed, urna.
+                </p>
               </div><!-- End .entry-content -->
 
               <div class="entry-footer row no-gutters flex-column flex-md-row">
@@ -63,13 +65,17 @@
                   <div class="social-icons social-icons-color">
                     <span class="social-label">Share this post:</span>
                     <a href="#" class="social-icon social-facebook" title="Facebook" target="_blank"><i
-                      class="icon-facebook-f"></i></a>
+                      class="icon-facebook-f"
+                    /></a>
                     <a href="#" class="social-icon social-twitter" title="Twitter" target="_blank"><i
-                      class="icon-twitter"></i></a>
+                      class="icon-twitter"
+                    /></a>
                     <a href="#" class="social-icon social-pinterest" title="Pinterest" target="_blank"><i
-                      class="icon-pinterest"></i></a>
+                      class="icon-pinterest"
+                    /></a>
                     <a href="#" class="social-icon social-linkedin" title="Linkedin" target="_blank"><i
-                      class="icon-linkedin"></i></a>
+                      class="icon-linkedin"
+                    /></a>
                   </div><!-- End .soial-icons -->
                 </div><!-- End .col-auto -->
               </div><!-- End .entry-footer row no-gutters -->
@@ -88,13 +94,15 @@
                     <h4><a href="#">John Doe</a></h4>
                   </div><!-- End .col -->
                   <div class="col-auto mt-1 mt-md-0">
-                    <a href="#" class="author-link">View all posts by John Doe <i class="icon-long-arrow-right"></i></a>
+                    <a href="#" class="author-link">View all posts by John Doe <i class="icon-long-arrow-right" /></a>
                   </div><!-- End .col -->
                 </div><!-- End .row -->
 
                 <div class="author-content">
-                  <p>Praesent dapibus, neque id cursus faucibus, tortor neque egestas auguae, eu vulputate magna eros eu
-                    erat. Aliquam erat volutpat. </p>
+                  <p>
+                    Praesent dapibus, neque id cursus faucibus, tortor neque egestas auguae, eu vulputate magna eros eu
+                    erat. Aliquam erat volutpat.
+                  </p>
                 </div><!-- End .author-content -->
               </div><!-- End .author-body -->
             </div><!-- End .entry-author-details-->
@@ -113,12 +121,12 @@
           </nav><!-- End .pager-nav -->
 
           <div class="related-posts">
-            <h3 class="title">Related Posts</h3><!-- End .title -->
+            <h3 class="title">
+              Related Posts
+            </h3><!-- End .title -->
 
             <no-ssr>
               <carousel>
-
-
                 <article class="entry entry-grid">
                   <figure class="entry-media">
                     <a href="single.html">
@@ -220,29 +228,41 @@
             </no-ssr>
           </div><!-- End .related-posts -->
 
+          <h3 class="title">
+            3 Comments
+          </h3><!-- End .title -->
 
-          <h3 class="title">3 Comments</h3><!-- End .title -->
-
-          <app-post-comment/>
-          <app-post-comment-form @commentCreated="commentCreated"/>
-
+          <app-post-comment />
+          <app-post-comment-form @commentCreated="commentCreated" />
         </div><!-- End .col-lg-9 -->
 
         <aside class="col-lg-3">
           <div class="sidebar">
             <div class="widget widget-search">
-              <h3 class="widget-title">Search</h3><!-- End .widget-title -->
+              <h3 class="widget-title">
+                Search
+              </h3><!-- End .widget-title -->
 
               <form action="#">
                 <label for="ws" class="sr-only">Search in blog</label>
-                <input type="search" class="form-control" name="ws" id="ws" placeholder="Search in blog" required>
-                <button type="submit" class="btn"><i class="icon-search"></i><span class="sr-only">Search</span>
+                <input
+                  id="ws"
+                  type="search"
+                  class="form-control"
+                  name="ws"
+                  placeholder="Search in blog"
+                  required
+                >
+                <button type="submit" class="btn">
+                  <i class="icon-search" /><span class="sr-only">Search</span>
                 </button>
               </form>
             </div><!-- End .widget -->
 
             <div class="widget widget-cats">
-              <h3 class="widget-title">Categories</h3><!-- End .widget-title -->
+              <h3 class="widget-title">
+                Categories
+              </h3><!-- End .widget-title -->
 
               <ul>
                 <li><a href="#">Lifestyle<span>3</span></a></li>
@@ -254,7 +274,9 @@
             </div><!-- End .widget -->
 
             <div class="widget">
-              <h3 class="widget-title">Popular Posts</h3><!-- End .widget-title -->
+              <h3 class="widget-title">
+                Popular Posts
+              </h3><!-- End .widget-title -->
 
               <ul class="posts-list">
                 <li>
@@ -309,7 +331,9 @@
             </div><!-- End .widget -->
 
             <div class="widget widget-banner-sidebar">
-              <div class="banner-sidebar-title">ad box 280 x 280</div><!-- End .ad-title -->
+              <div class="banner-sidebar-title">
+                ad box 280 x 280
+              </div><!-- End .ad-title -->
 
               <div class="banner-sidebar">
                 <a href="#">
@@ -319,7 +343,9 @@
             </div><!-- End .widget -->
 
             <div class="widget">
-              <h3 class="widget-title">Browse Tags</h3><!-- End .widget-title -->
+              <h3 class="widget-title">
+                Browse Tags
+              </h3><!-- End .widget-title -->
 
               <div class="tagcloud">
                 <a href="#">fashion</a>
@@ -333,11 +359,15 @@
             </div><!-- End .widget -->
 
             <div class="widget widget-text">
-              <h3 class="widget-title">About Blog</h3><!-- End .widget-title -->
+              <h3 class="widget-title">
+                About Blog
+              </h3><!-- End .widget-title -->
 
               <div class="widget-text-content">
-                <p>Vestibulum volutpat, lacus a ultrices sagittis, mi neque euismod dui, pulvinar nunc sapien ornare
-                  nisl.</p>
+                <p>
+                  Vestibulum volutpat, lacus a ultrices sagittis, mi neque euismod dui, pulvinar nunc sapien ornare
+                  nisl.
+                </p>
               </div>
             </div>
           </div>
@@ -348,23 +378,23 @@
 </template>
 
 <script>
-import AppPostComment from "@/components/Post/PostComment";
-import AppPostCommentForm from "@/components/Post/PostCommentForm";
+import AppPostComment from '@/components/Post/PostComment'
+import AppPostCommentForm from '@/components/Post/PostCommentForm'
 
 export default {
-  name: "id",
+  name: 'Id',
   components: {
     AppPostComment,
     AppPostCommentForm
   },
-  validate({params}) {
+  validate ({ params }) {
     return Boolean(params.id)
   },
   methods: {
-    commentCreated() {
+    commentCreated () {
 
     }
-  },
+  }
 
 }
 </script>

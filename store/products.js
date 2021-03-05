@@ -10,9 +10,8 @@ const products = [
     image: [],
     color: 'yellow',
     brand: 'Gucci',
-    date: new Date().toLocaleString(),
+    date: new Date().toLocaleString()
   }
 ]
-
 
 export const actions = {}

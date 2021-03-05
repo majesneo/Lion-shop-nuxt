@@ -1,6 +1,6 @@
 export default {
   methods: {
-    async confirm(title, message) {
+    async confirm (title, message) {
       await this.$bvModal.msgBoxConfirm(message, {
         title,
         size: 'sm',
@@ -14,5 +14,3 @@ export default {
     }
   }
 }
-
-

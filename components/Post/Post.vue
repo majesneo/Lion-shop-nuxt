@@ -3,7 +3,9 @@
     <div class="container">
       <nav class="blog-nav">
         <ul class="menu-cat entry-filter justify-content-center">
-          <li class="active"><a href="#" data-filter="*">All Blog Posts<span>9</span></a></li>
+          <li class="active">
+            <a href="#" data-filter="*">All Blog Posts<span>9</span></a>
+          </li>
           <li><a href="#" data-filter=".lifestyle">Lifestyle<span>3</span></a></li>
           <li><a href="#" data-filter=".shopping">Shopping<span>1</span></a></li>
           <li><a href="#" data-filter=".fashion">Fashion<span>2</span></a></li>
@@ -16,7 +18,7 @@
         <div class="entry-item lifestyle shopping col-sm-6 col-lg-4">
           <article class="entry entry-mask">
             <figure class="entry-media">
-              <a @click.prevent="showBlogPost" href="#">
+              <a href="#" @click.prevent="showBlogPost">
                 <img src="assets/images/blog/mask/grid/post-1.jpg" alt="image desc">
               </a>
             </figure>
@@ -251,20 +253,24 @@
         </div><!-- End .entry-item -->
       </div><!-- End .entry-container -->
 
-      <div class="mb-3"></div><!-- End .mb-3 -->
+      <div class="mb-3" /><!-- End .mb-3 -->
 
       <nav aria-label="Page navigation">
         <ul class="pagination justify-content-center">
           <li class="page-item disabled">
             <a class="page-link page-link-prev" href="#" aria-label="Previous" tabindex="-1" aria-disabled="true">
-              <span aria-hidden="true"><i class="icon-long-arrow-left"></i></span>Prev
+              <span aria-hidden="true"><i class="icon-long-arrow-left" /></span>Prev
             </a>
           </li>
-          <li class="page-item active" aria-current="page"><a class="page-link" href="#">1</a></li>
-          <li class="page-item"><a class="page-link" href="#">2</a></li>
+          <li class="page-item active" aria-current="page">
+            <a class="page-link" href="#">1</a>
+          </li>
+          <li class="page-item">
+            <a class="page-link" href="#">2</a>
+          </li>
           <li class="page-item">
             <a class="page-link page-link-next" href="#" aria-label="Next">
-              Next <span aria-hidden="true"><i class="icon-long-arrow-right"></i></span>
+              Next <span aria-hidden="true"><i class="icon-long-arrow-right" /></span>
             </a>
           </li>
         </ul>
@@ -274,15 +280,15 @@
 </template>
 
 <script>
-import AppPagination from "@/components/Pagination";
+/* import AppPagination from '@/components/Pagination' */
 
 export default {
-  name: "Post",
+  name: 'Post',
   components: {
-    AppPagination
+    /* AppPagination */
   },
   methods: {
-    showBlogPost() {
+    showBlogPost () {
       const id = 'test-id'
       this.$router.push(`/post/${id}`)
     }

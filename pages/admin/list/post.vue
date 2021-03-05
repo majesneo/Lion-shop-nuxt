@@ -2,18 +2,22 @@
   <div>
     <b-table striped hover :items="posts" :fields="fields">
       <template #cell(edit)="row">
-        <b-button v-b-tooltip.hover
-                  title="Edit post"
-                  pill
-                  variant="outline-success">
-          <b-icon @click="openPost(row.item._id)" icon="pencil-square"></b-icon>
+        <b-button
+          v-b-tooltip.hover
+          title="Edit post"
+          pill
+          variant="outline-success"
+        >
+          <b-icon icon="pencil-square" @click="openPost(row.item._id)" />
         </b-button>
-        <b-button v-b-tooltip.hover
-                  title="Remove post"
-                  @click="removePost(row.item._id)"
-                  pill
-                  variant="outline-danger">
-          <b-icon icon="x-square-fill"></b-icon>
+        <b-button
+          v-b-tooltip.hover
+          title="Remove post"
+          pill
+          variant="outline-danger"
+          @click="removePost(row.item._id)"
+        >
+          <b-icon icon="x-square-fill" />
         </b-button>
       </template>
       <template #cell(comments)="data">
@@ -25,58 +29,57 @@
         </div>
       </template>
     </b-table>
-
   </div>
 </template>
 
 <script>
-import mixinConfirm from "@/mixins/mixinConfirm";
-import mixinToast from "@/mixins/mixinToast";
+import mixinConfirm from '@/mixins/mixinConfirm'
+import mixinToast from '@/mixins/mixinToast'
 
 export default {
-  name: "post",
-  layout: "admin",
-  middleware: "auth-admin",
+  name: 'Post',
+  layout: 'admin',
+  middleware: 'auth-admin',
   mixins: [mixinConfirm, mixinToast],
-  data() {
+  async asyncData ({ store }) {
+    const posts = await store.dispatch('posts/getPosts')
+    return { posts }
+  },
+  data () {
     return {
       fields: [
         {
-          key: 'author',
+          key: 'author'
         },
         {
-          key: 'title',
+          key: 'title'
         },
         {
           key: 'views',
-          sortable: true,
+          sortable: true
         },
         {
           key: 'date',
           sortable: true
         },
         {
-          key: 'tag',
+          key: 'tag'
         },
         {
           key: 'comments',
           sortable: true
         },
         {
-          key: 'edit',
+          key: 'edit'
         }
-      ],
+      ]
     }
   },
-  async asyncData({store}) {
-    const posts = await store.dispatch('posts/getPosts')
-    return {posts}
-  },
   methods: {
-    openPost(id) {
+    openPost (id) {
       this.$router.push(`/admin/post/${id}`)
     },
-    async removePost(id) {
+    async removePost (id) {
       try {
         await this.confirm('Attention', 'Are you sure you want to delete the post?')
         await this.$store.dispatch('posts/removePost', id)
@@ -89,7 +92,7 @@ export default {
         throw e
       }
     }
-  },
+  }
 
 }
 </script>
@@ -97,6 +100,5 @@ export default {
 .btn {
   min-width: 50px;
 }
-
 
 </style>

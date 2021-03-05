@@ -1,12 +1,10 @@
-<template>
-
-</template>
+<template />
 
 <script>
 export default {
-  name: "products",
-  layout: "admin",
-  middleware: "auth-admin",
+  name: 'Products',
+  layout: 'admin',
+  middleware: 'auth-admin'
 }
 </script>
 

@@ -1,23 +1,25 @@
 <template>
-  <nuxt/>
+  <nuxt />
 </template>
 
 <script>
-import mixinToast from "@/mixins/mixinToast";
+import mixinToast from '@/mixins/mixinToast'
 
 export default {
-  name: "empty",
+  name: 'Empty',
   mixins: [mixinToast],
   computed: {
-    error() {
+    error () {
       return this.$store.getters.error
     }
   },
   watch: {
-    error(message) {
-      this.makeToast('b-toaster-top-center', 'danger', message)
+    error (message) {
+      console.log(message.response.data.message)
+      console.log(message)
+      this.makeToast('b-toaster-top-center', 'danger', message.response.data.message)
     }
-  },
+  }
 
 }
 </script>

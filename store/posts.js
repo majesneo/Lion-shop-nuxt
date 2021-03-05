@@ -1,4 +1,4 @@
-import login from "@/pages/admin/login";
+import login from '@/pages/admin/login'
 
 const posts = [
   {
@@ -36,16 +36,15 @@ const posts = [
   }
 ]
 
-
 export const actions = {
-  async getPosts({}) {
-    return await new Promise(resolve => {
+  async getPosts ({}) {
+    return await new Promise((resolve) => {
       setTimeout(() => {
         resolve(posts)
       }, 1000)
     })
   },
-  async removePost({}, id) {
+  async removePost ({}, id) {
     try {
       return await new Promise((resolve, reject) => {
         setTimeout(() => {
@@ -55,14 +54,14 @@ export const actions = {
     } catch (e) {
     }
   },
-  async getPostById({}, id) {
+  async getPostById ({}, id) {
     return await new Promise((resolve) => {
       setTimeout(() => {
         resolve(posts.find(post => post._id === id))
       }, 1000)
     })
   },
-  async updatePost({}, {id, text}) {
+  async updatePost ({}, { id, text }) {
     try {
       return await new Promise((resolve) => {
         setTimeout(() => {
@@ -73,7 +72,7 @@ export const actions = {
 
     }
   },
-  async createPost({commit}, formData) {
+  async createPost ({ commit }, formData) {
     try {
       return await new Promise((resolve) => {
         setTimeout(() => {
@@ -81,7 +80,7 @@ export const actions = {
         }, 1000)
       })
     } catch (e) {
-      commit('setError', e, {root: true})
+      commit('setError', e, { root: true })
       throw e
     }
   }
