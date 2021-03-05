@@ -19,33 +19,6 @@
         Title is required
       </p>
 
-      <b-container fluid class="p-4 bg-dark mt-1">
-        <p class="text-white">
-          Choose a image or drop it here...
-        </p>
-        <b-row>
-          <b-col>
-            <!-- <b-img thumbnail fluid src="https://picsum.photos/250/250/?image=54" alt="Image 1"></b-img>-->
-          </b-col>
-        </b-row>
-        <b-form-file
-          ref="file-input"
-          v-model="images"
-          accept=".jpg, .png, .gif"
-          class="mt-2"
-          multiple
-        >
-          <template slot="file-name" slot-scope="{ names }">
-            <b-badge variant="dark">
-              {{ names[0] }}
-            </b-badge>
-            <b-badge v-if="names.length > 1" variant="dark" class="ml-1">
-              + {{ names.length - 1 }} More files
-            </b-badge>
-          </template>
-        </b-form-file>
-      </b-container>
-
       <p class="mt-1">
         Description
       </p>
