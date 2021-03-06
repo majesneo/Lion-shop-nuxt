@@ -77,6 +77,7 @@ export const actions = {
       const res = await this.$axios.$post('/api/post/admin', formData)
       console.log(res)
     } catch (e) {
+      console.log(e)
       commit('setError', e, { root: true })
       throw e
     }

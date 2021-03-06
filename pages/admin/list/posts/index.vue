@@ -24,7 +24,7 @@
         {{ data.item.comments.length }}
       </template>
       <template #cell(tag)="data">
-        <div v-for="tag in data.item.tag">
+        <div v-for="tag in data.item.tag" :key="tag">
           {{ tag }}
         </div>
       </template>

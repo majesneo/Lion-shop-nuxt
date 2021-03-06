@@ -15,9 +15,7 @@ export default {
   },
   watch: {
     error (message) {
-      console.log(message.response.data.message)
-      console.log(message)
-      this.makeToast('b-toaster-top-center', 'danger', message.response.data.message)
+      this.makeToast('b-toaster-top-center', 'danger', message.response.data.error.message)
     }
   }
 

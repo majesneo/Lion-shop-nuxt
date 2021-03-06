@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <section class="list-post">
     <div>
       <b-breadcrumb class="breadcrumb-nav mt-2 mb-1">
         <b-breadcrumb-item class="breadcrumb-item" to="/admin/analytics">
@@ -30,27 +30,9 @@
         class="text-danger"
       >Title is required
       </span>
-      <app-editor-tip-tap :description-post="description" />
-      <b-overlay
-        :show="busy"
-        rounded
-        opacity="0.6"
-        spinner-small
-        spinner-variant="primary"
-        class="d-inline-block"
-      >
-        <b-button
-          variant="primary"
-          :disabled="$v.$anyError"
-          type="submit"
-          class="btn btn-outline-primary-2 mt-2"
-        >
-          <span>Refresh</span>
-          <i class="icon-long-arrow-right" />
-        </b-button>
-      </b-overlay>
+      <app-editor-tip-tap :method="'Refresh'" :description="description" />
     </div>
-  </div>
+  </section>
 </template>
 
 <script>
@@ -125,5 +107,7 @@ export default {
   align-items: center;
   justify-content: space-between;
 }
-
+.list-post{
+  width: 60%;
+}
 </style>

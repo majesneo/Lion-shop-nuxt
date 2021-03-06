@@ -23,7 +23,15 @@ app.use(passport.initialize())
 passport.use(passportStrategy)
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({
+  limit: '5mb',
+  parameterLimit: 100000,
+  extended: false
+}))
 
+app.use(bodyParser.json({
+  limit: '5mb'
+}))
 app.use('/post', postRoutes)
 app.use('/auth', authRoutes)
 app.use(commentRoutes)

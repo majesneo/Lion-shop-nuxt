@@ -5,10 +5,6 @@ const postSchema = new Schema({
     type: String,
     required: true
   },
-  text: {
-    type: String,
-    required: true
-  },
   date: {
     type: Date,
     default: Date.now
@@ -17,7 +13,19 @@ const postSchema = new Schema({
     type: Number,
     default: 0
   },
-  imageUrl: String,
+  tag: [
+    {
+      type: String
+    }
+  ],
+  author: {
+    type: String,
+    required: true
+  },
+  content: {
+    type: String,
+    required: true
+  },
   comments: [
     {
       type: Schema.Types.ObjectId,

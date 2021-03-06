@@ -1,128 +1,137 @@
 <template>
-  <div>
-    <h5 class="mt-2">
-      Create post
-    </h5>
-    <b-form class="size-form mt-2" @submit.prevent="onSubmit">
-      <p>Title</p>
+  <div class="create-post mt-3">
+    <h4 class="text-center">
+      Create Post
+    </h4>
 
+    <div class="d-flex align-items-center justify-content-between mt-4">
+      <div>
+        <span
+          v-if="$v.tagPost.$dirty &&
+            !$v.tagPost.required"
+          class="text-danger d-block"
+        >Tag is required
+        </span>
+        <b-form-input
+          v-model.trim="$v.tagPost.$model"
+          class=""
+          style="margin: 0; width: 350px;"
+          placeholder="Enter tag title eg: Fashion, Lifestyle, Travel..."
+        />
+      </div>
+      <div>
+        <span
+          v-if="$v.authorPost.$dirty &&
+            !$v.authorPost.required"
+          class="text-danger"
+        >Name is required
+        </span>
+        <b-form-input
+          v-model.trim="$v.authorPost.$model"
+          class="ml-auto"
+          style="margin: 0; width: 350px;"
+          placeholder="Enter your name"
+        />
+      </div>
+    </div>
+    <div class="text-center">
+      <span
+        v-if="$v.titlePost.$dirty &&
+          !$v.titlePost.required"
+        class="text-danger"
+      >Title is required
+      </span>
       <b-form-input
-        v-model="$v.title.$model"
+        v-model="$v.titlePost.$model"
         style="margin: 0"
         placeholder="Enter post title"
+        class="text-center mt-2"
       />
-      <p
-        v-if="$v.title.$dirty &&
-          !$v.title.required"
-        class="text-danger"
-      >
-        Title is required
-      </p>
+    </div>
 
-      <p class="mt-1">
-        Description
-      </p>
-      <b-form-textarea
-        id="textarea"
-        v-model="$v.description.$model"
-        style="margin: 0"
-        placeholder="Enter description..."
-        rows="3"
-        max-rows="6"
-      />
-
-      <p
-        v-if="$v.description.$dirty && !$v.description.required"
-        class="text-danger"
-      >
-        Description is required
-      </p>
-
-      <b-overlay
-        :show="busy"
-        rounded
-        opacity="0.6"
-        spinner-small
-        spinner-variant="primary"
-        class="d-inline-block"
-      >
-        <b-button
-          variant="primary"
-          :disabled="$v.$anyError"
-          type="submit"
-          class="btn btn-outline-primary-2 mt-2"
-        >
-          <span>Create</span>
-          <i class="icon-long-arrow-right" />
-        </b-button>
-      </b-overlay>
-      <b-button v-b-modal.modal-1 class="mt-2">
-        Post preview
-      </b-button>
-
-      <b-modal id="modal-1" title="Post preview">
-        {{ title }}
-        {{ description }}
-      </b-modal>
-    </b-form>
+    <app-editor-tip-tap
+      :method="'Create'"
+      :title="titlePost"
+      :description="descriptionPost"
+      @checkDescrValid="isValid"
+    />
   </div>
 </template>
 
 <script>
 import { required } from 'vuelidate/lib/validators'
 import mixinToast from '@/mixins/mixinToast'
+import AppEditorTipTap from '@/components/EditorTipTap'
 
 export default {
   name: 'Post',
   layout: 'admin',
   middleware: 'auth-admin',
+  components: {
+    AppEditorTipTap
+  },
   mixins: [mixinToast],
   data () {
     return {
-      title: '',
-      description: '',
-      busy: false,
-      images: null
+      titlePost: '',
+      descriptionPost: '',
+      tagPost: '',
+      authorPost: '',
+      busy: false
     }
   },
   methods: {
-    async onSubmit () {
+    isValid (description) {
       this.$v.$touch()
-      if (!this.$v.$invalid && this.images.length !== 0) {
-        try {
-          this.busy = true
-          const formData = new FormData()
-          console.log(this.images)
-          formData.append('title', this.title)
-          formData.append('description', this.description)
-          formData.append('image', this.images)
-          this.images.forEach(data => console.log(data))
-          await this.$store.dispatch('posts/createPost', formData)
-          this.$v.$reset()
-          this.$refs['file-input'].reset()
-          this.title = ''
-          this.description = ''
-          const message = 'Post created'
-          this.makeToast('b-toaster-top-center', 'success', message)
-        } catch (e) {
-          console.log(e)
-          this.busy = false
-        } finally {
-          this.busy = false
-        }
+      if (description && !this.$v.$invalid) {
+        this.onSubmit(description)
       } else {
         this.$v.$touch()
         const message = 'The form is not valid'
         this.makeToast('b-toaster-top-center', 'danger', message)
         this.busy = false
       }
+    },
+
+    async onSubmit (description) {
+      try {
+        const formData = this.getFormData(description)
+        console.log(formData)
+        await this.$store.dispatch('posts/createPost', formData)
+        this.cleaningForm()
+        const message = 'Post created'
+        this.makeToast('b-toaster-top-center', 'success', message)
+      } catch (e) {
+
+      } finally {
+        this.busy = false
+      }
+    },
+    getFormData (description) {
+      return {
+        title: this.titlePost,
+        tag: this.tagPost,
+        author: this.authorPost,
+        description
+      }
+    },
+    cleaningForm () {
+      this.$v.$reset()
+      this.titlePost = ''
+      this.descriptionPost = ''
+    },
+    isLowerCase (text) {
+
     }
   },
   validations: {
-    title: {
+    titlePost: {
       required
     },
-    description: {
+    tagPost: {
+      required
+    },
+    authorPost: {
       required
     }
   }
@@ -132,6 +141,9 @@ export default {
 <style scoped>
 .size-form {
   width: 50%;
+}
+.create-post{
+  width: 60%;
 }
 
 </style>

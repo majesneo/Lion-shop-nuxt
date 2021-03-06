@@ -2,143 +2,165 @@
   <div>
     <b-overlay :show="!editor" no-wrap />
     <no-ssr>
-      <div class="editor mt-2">
-        <editor-menu-bar v-slot="{ commands, isActive }" :editor="editor">
-          <div class="menubar">
-            <button
-              class="menubar__button"
-              @click="showImageInfo()"
-            >
-              <b-icon icon="card-image" />
-            </button>
-            <button
-              class="menubar__button"
-              :class="{ 'is-active': isActive.bold() }"
-              @click="commands.bold"
-            >
-              <b-icon icon="type-bold" />
-            </button>
+      <form action="" @submit.prevent="submitPost">
+        <div class="editor mt-2">
+          <editor-menu-bar v-slot="{ commands, isActive }" :editor="editor">
+            <div class="menubar">
+              <button
+                class="menubar__button"
+                @click="showImageInfo()"
+              >
+                <b-icon icon="card-image" />
+              </button>
+              <button
+                class="menubar__button"
+                :class="{ 'is-active': isActive.bold() }"
+                @click="commands.bold"
+              >
+                <b-icon icon="type-bold" />
+              </button>
 
-            <button
-              class="menubar__button"
-              :class="{ 'is-active': isActive.italic() }"
-              @click="commands.italic"
-            >
-              <b-icon icon="type-italic" />
-            </button>
+              <button
+                class="menubar__button"
+                :class="{ 'is-active': isActive.italic() }"
+                @click="commands.italic"
+              >
+                <b-icon icon="type-italic" />
+              </button>
 
-            <button
-              class="menubar__button"
-              :class="{ 'is-active': isActive.strike() }"
-              @click="commands.strike"
-            >
-              <b-icon icon="type-strikethrough" />
-            </button>
+              <button
+                class="menubar__button"
+                :class="{ 'is-active': isActive.strike() }"
+                @click="commands.strike"
+              >
+                <b-icon icon="type-strikethrough" />
+              </button>
 
-            <button
-              class="menubar__button"
-              :class="{ 'is-active': isActive.underline() }"
-              @click="commands.underline"
-            >
-              <b-icon icon="type-underline" />
-            </button>
+              <button
+                class="menubar__button"
+                :class="{ 'is-active': isActive.underline() }"
+                @click="commands.underline"
+              >
+                <b-icon icon="type-underline" />
+              </button>
 
-            <button
-              class="menubar__button"
-              :class="{ 'is-active': isActive.code() }"
-              @click="commands.code"
-            >
-              <b-icon icon="code" />
-            </button>
+              <button
+                class="menubar__button"
+                :class="{ 'is-active': isActive.code() }"
+                @click="commands.code"
+              >
+                <b-icon icon="code" />
+              </button>
 
-            <button
-              class="menubar__button"
-              :class="{ 'is-active': isActive.paragraph() }"
-              @click="commands.paragraph"
-            >
-              <b-icon icon="paragraph" />
-            </button>
+              <button
+                class="menubar__button"
+                :class="{ 'is-active': isActive.paragraph() }"
+                @click="commands.paragraph"
+              >
+                <b-icon icon="paragraph" />
+              </button>
 
-            <button
-              class="menubar__button"
-              :class="{ 'is-active': isActive.heading({ level: 1 }) }"
-              @click="commands.heading({ level: 1 })"
-            >
-              H1
-            </button>
+              <button
+                class="menubar__button"
+                :class="{ 'is-active': isActive.heading({ level: 1 }) }"
+                @click="commands.heading({ level: 1 })"
+              >
+                H1
+              </button>
 
-            <button
-              class="menubar__button"
-              :class="{ 'is-active': isActive.heading({ level: 2 }) }"
-              @click="commands.heading({ level: 2 })"
-            >
-              H2
-            </button>
+              <button
+                class="menubar__button"
+                :class="{ 'is-active': isActive.heading({ level: 2 }) }"
+                @click="commands.heading({ level: 2 })"
+              >
+                H2
+              </button>
 
-            <button
-              class="menubar__button"
-              :class="{ 'is-active': isActive.heading({ level: 3 }) }"
-              @click="commands.heading({ level: 3 })"
-            >
-              H3
-            </button>
+              <button
+                class="menubar__button"
+                :class="{ 'is-active': isActive.heading({ level: 3 }) }"
+                @click="commands.heading({ level: 3 })"
+              >
+                H3
+              </button>
 
-            <button
-              class="menubar__button"
-              :class="{ 'is-active': isActive.bullet_list() }"
-              @click="commands.bullet_list"
-            >
-              <b-icon icon="list-ul" />
-            </button>
+              <button
+                class="menubar__button"
+                :class="{ 'is-active': isActive.bullet_list() }"
+                @click="commands.bullet_list"
+              >
+                <b-icon icon="list-ul" />
+              </button>
 
-            <button
-              class="menubar__button"
-              :class="{ 'is-active': isActive.ordered_list() }"
-              @click="commands.ordered_list"
-            >
-              <b-icon icon="list-ol" />
-            </button>
+              <button
+                class="menubar__button"
+                :class="{ 'is-active': isActive.ordered_list() }"
+                @click="commands.ordered_list"
+              >
+                <b-icon icon="list-ol" />
+              </button>
 
-            <button
-              class="menubar__button"
-              :class="{ 'is-active': isActive.blockquote() }"
-              @click="commands.blockquote"
-            >
-              <b-icon icon="blockquote-left" />
-            </button>
+              <button
+                class="menubar__button"
+                :class="{ 'is-active': isActive.blockquote() }"
+                @click="commands.blockquote"
+              >
+                <b-icon icon="blockquote-left" />
+              </button>
 
-            <button
-              class="menubar__button"
-              :class="{ 'is-active': isActive.code_block() }"
-              @click="commands.code_block"
-            >
-              <b-icon icon="code" />
-            </button>
+              <button
+                class="menubar__button"
+                :class="{ 'is-active': isActive.code_block() }"
+                @click="commands.code_block"
+              >
+                <b-icon icon="code" />
+              </button>
 
-            <button
-              class="menubar__button"
-              @click="commands.horizontal_rule"
-            >
-              <b-icon icon="hr" />
-            </button>
+              <button
+                class="menubar__button"
+                @click="commands.horizontal_rule"
+              >
+                <b-icon icon="hr" />
+              </button>
 
-            <button
-              class="menubar__button"
-              @click="commands.undo"
-            >
-              <b-icon icon="skip-backward" />
-            </button>
+              <button
+                class="menubar__button"
+                @click="commands.undo"
+              >
+                <b-icon icon="skip-backward" />
+              </button>
 
-            <button
-              class="menubar__button"
-              @click="commands.redo"
+              <button
+                class="menubar__button"
+                @click="commands.redo"
+              >
+                <b-icon icon="skip-forward" />
+              </button>
+            </div>
+          </editor-menu-bar>
+
+          <editor-content class="editor__content" :editor="editor" />
+
+          <b-overlay
+            :show="busy"
+            rounded
+            opacity="0.6"
+            spinner-small
+            spinner-variant="primary"
+            class="d-inline-block"
+          >
+            <b-button
+              variant="primary"
+              type="submit"
+              class="btn btn-outline-primary-2 mt-2 mb-3"
+              @click.prevent="submitPost"
             >
-              <b-icon icon="skip-forward" />
-            </button>
-          </div>
-        </editor-menu-bar>
-        <editor-content class="editor__content" :editor="editor" />
-      </div>
+              <span>{{ method }}</span>
+              <i class="icon-long-arrow-right" />
+            </b-button>
+          </b-overlay>
+        </div>
+      </form>
     </no-ssr>
   </div>
 </template>
@@ -155,6 +177,7 @@ import {
   BulletList,
   ListItem,
   TodoItem,
+  Placeholder,
   TodoList,
   Bold,
   Image,
@@ -174,16 +197,33 @@ export default {
     EditorMenuBar
   },
   mixins: [mixinToast],
+
   props: {
-    descriptionPost: {
+    title: {
+      type: String,
+      default: ''
+    },
+    description: {
+      type: String,
+      default: ''
+    },
+    method: {
       type: String,
       default: ''
     }
   },
   data () {
     return {
-      editor: null
+      editor: null,
+      contentPost: '',
+      busy: false
     }
+  },
+  computed: {
+    showDescriptionPost () {
+      return this.description ? this.description : this.contentPost
+    }
+
   },
   mounted () {
     this.editor = new Editor({
@@ -203,11 +243,23 @@ export default {
         new Bold(),
         new Code(),
         new Italic(),
+        new Placeholder({
+          emptyEditorClass: 'is-editor-empty',
+          emptyNodeClass: 'is-empty',
+          emptyNodeText: 'Write something …',
+          showOnlyWhenEditable: true,
+          showOnlyCurrent: true
+        }),
         new Strike(),
         new Underline(),
         new History()
       ],
-      content: `${this.descriptionPost ? this.descriptionPost : ''}`
+      content: `${this.showDescriptionPost}`,
+      onUpdate: ({ getHTML }) => {
+        this.changed = true
+        const html = getHTML()
+        this.contentPost = html
+      }
     })
   },
   beforeDestroy () {
@@ -217,12 +269,36 @@ export default {
     showImageInfo () {
       const message = 'drop image in text'
       this.makeToast('b-toaster-top-center', 'info', message)
+    },
+    checkValid () {
+      return this.contentPost.length > 7
+    },
+    submitPost () {
+      if (this.checkValid()) {
+        this.$emit('checkDescrValid', this.contentPost)
+      } else {
+        this.$emit('checkDescrValid', false)
+      }
     }
   }
 }
 </script>
 
 <style scoped>
+.editor p.is-empty:first-child::before {
+  content: attr(data-empty-text);
+  float: left;
+  color: #aaa;
+  pointer-events: none;
+  height: 0;
+  font-style: italic;
+}
+.editor__content{
+  border: 1px solid #ebebeb;
+}
+:focus {
+  outline: #c96 solid 1px;
+}
 .editor {
   display: flex;
   flex-direction: column;
