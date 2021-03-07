@@ -31,7 +31,8 @@ export default {
     { src: 'plugins/owl.js', ssr: false },
     '@/plugins/bootstrap',
     '@/plugins/vuelidate',
-    '@/plugins/axios'
+    '@/plugins/axios',
+    '@/plugins/dateFilter'
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components

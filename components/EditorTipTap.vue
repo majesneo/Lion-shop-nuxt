@@ -8,14 +8,14 @@
             <div class="menubar">
               <button
                 class="menubar__button"
-                @click="showImageInfo()"
+                @click.prevent="showImageInfo()"
               >
                 <b-icon icon="card-image" />
               </button>
               <button
                 class="menubar__button"
                 :class="{ 'is-active': isActive.bold() }"
-                @click="commands.bold"
+                @click.prevent="commands.bold"
               >
                 <b-icon icon="type-bold" />
               </button>
@@ -23,7 +23,7 @@
               <button
                 class="menubar__button"
                 :class="{ 'is-active': isActive.italic() }"
-                @click="commands.italic"
+                @click.prevent="commands.italic"
               >
                 <b-icon icon="type-italic" />
               </button>
@@ -31,7 +31,7 @@
               <button
                 class="menubar__button"
                 :class="{ 'is-active': isActive.strike() }"
-                @click="commands.strike"
+                @click.prevent="commands.strike"
               >
                 <b-icon icon="type-strikethrough" />
               </button>
@@ -39,7 +39,7 @@
               <button
                 class="menubar__button"
                 :class="{ 'is-active': isActive.underline() }"
-                @click="commands.underline"
+                @click.prevent="commands.underline"
               >
                 <b-icon icon="type-underline" />
               </button>
@@ -47,7 +47,7 @@
               <button
                 class="menubar__button"
                 :class="{ 'is-active': isActive.code() }"
-                @click="commands.code"
+                @click.prevent="commands.code"
               >
                 <b-icon icon="code" />
               </button>
@@ -55,7 +55,7 @@
               <button
                 class="menubar__button"
                 :class="{ 'is-active': isActive.paragraph() }"
-                @click="commands.paragraph"
+                @click.prevent="commands.paragraph"
               >
                 <b-icon icon="paragraph" />
               </button>
@@ -63,7 +63,7 @@
               <button
                 class="menubar__button"
                 :class="{ 'is-active': isActive.heading({ level: 1 }) }"
-                @click="commands.heading({ level: 1 })"
+                @click.prevent="commands.heading({ level: 1 })"
               >
                 H1
               </button>
@@ -71,7 +71,7 @@
               <button
                 class="menubar__button"
                 :class="{ 'is-active': isActive.heading({ level: 2 }) }"
-                @click="commands.heading({ level: 2 })"
+                @click.prevent="commands.heading({ level: 2 })"
               >
                 H2
               </button>
@@ -79,7 +79,7 @@
               <button
                 class="menubar__button"
                 :class="{ 'is-active': isActive.heading({ level: 3 }) }"
-                @click="commands.heading({ level: 3 })"
+                @click.prevent="commands.heading({ level: 3 })"
               >
                 H3
               </button>
@@ -87,7 +87,7 @@
               <button
                 class="menubar__button"
                 :class="{ 'is-active': isActive.bullet_list() }"
-                @click="commands.bullet_list"
+                @click.prevent="commands.bullet_list"
               >
                 <b-icon icon="list-ul" />
               </button>
@@ -95,7 +95,7 @@
               <button
                 class="menubar__button"
                 :class="{ 'is-active': isActive.ordered_list() }"
-                @click="commands.ordered_list"
+                @click.prevent="commands.ordered_list"
               >
                 <b-icon icon="list-ol" />
               </button>
@@ -103,7 +103,7 @@
               <button
                 class="menubar__button"
                 :class="{ 'is-active': isActive.blockquote() }"
-                @click="commands.blockquote"
+                @click.prevent="commands.blockquote"
               >
                 <b-icon icon="blockquote-left" />
               </button>
@@ -111,28 +111,28 @@
               <button
                 class="menubar__button"
                 :class="{ 'is-active': isActive.code_block() }"
-                @click="commands.code_block"
+                @click.prevent="commands.code_block"
               >
                 <b-icon icon="code" />
               </button>
 
               <button
                 class="menubar__button"
-                @click="commands.horizontal_rule"
+                @click.prevent="commands.horizontal_rule"
               >
                 <b-icon icon="hr" />
               </button>
 
               <button
                 class="menubar__button"
-                @click="commands.undo"
+                @click.prevent="commands.undo"
               >
                 <b-icon icon="skip-backward" />
               </button>
 
               <button
                 class="menubar__button"
-                @click="commands.redo"
+                @click.prevent="commands.redo"
               >
                 <b-icon icon="skip-forward" />
               </button>
@@ -141,24 +141,26 @@
 
           <editor-content class="editor__content" :editor="editor" />
 
-          <b-overlay
-            :show="busy"
-            rounded
-            opacity="0.6"
-            spinner-small
-            spinner-variant="primary"
-            class="d-inline-block"
-          >
-            <b-button
-              variant="primary"
-              type="submit"
-              class="btn btn-outline-primary-2 mt-2 mb-3"
-              @click.prevent="submitPost"
+          <div class="text-center">
+            <b-overlay
+              :show="busy"
+              rounded
+              opacity="0.6"
+              spinner-small
+              spinner-variant="primary"
+              class="d-inline-block"
             >
-              <span>{{ method }}</span>
-              <i class="icon-long-arrow-right" />
-            </b-button>
-          </b-overlay>
+              <b-button
+                variant="primary"
+                type="submit"
+                class="btn btn-outline-primary-2 mt-2 mb-3"
+                @click.prevent="submitPost"
+              >
+                <span>{{ method }}</span>
+                <i class="icon-long-arrow-right" />
+              </b-button>
+            </b-overlay>
+          </div>
         </div>
       </form>
     </no-ssr>
@@ -177,7 +179,6 @@ import {
   BulletList,
   ListItem,
   TodoItem,
-  Placeholder,
   TodoList,
   Bold,
   Image,
@@ -223,7 +224,6 @@ export default {
     showDescriptionPost () {
       return this.description ? this.description : this.contentPost
     }
-
   },
   mounted () {
     this.editor = new Editor({
@@ -243,13 +243,6 @@ export default {
         new Bold(),
         new Code(),
         new Italic(),
-        new Placeholder({
-          emptyEditorClass: 'is-editor-empty',
-          emptyNodeClass: 'is-empty',
-          emptyNodeText: 'Write something …',
-          showOnlyWhenEditable: true,
-          showOnlyCurrent: true
-        }),
         new Strike(),
         new Underline(),
         new History()

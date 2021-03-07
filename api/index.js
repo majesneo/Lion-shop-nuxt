@@ -21,20 +21,13 @@ mongoose.connect(keys.MONGO_URL, {
 
 app.use(passport.initialize())
 passport.use(passportStrategy)
-app.use(bodyParser.urlencoded({ extended: true }))
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({
-  limit: '5mb',
-  parameterLimit: 100000,
-  extended: false
-}))
 
-app.use(bodyParser.json({
-  limit: '5mb'
-}))
+app.use(bodyParser.json({ limit: '50mb' }))
+app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }))
+
 app.use('/post', postRoutes)
 app.use('/auth', authRoutes)
-app.use(commentRoutes)
+app.use('/comment', commentRoutes)
 
 module.exports = app
 if (require.main === module) {

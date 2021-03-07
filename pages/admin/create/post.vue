@@ -1,23 +1,22 @@
 <template>
-  <div class="create-post mt-3">
+  <div class="create-post mt-3  d-flex flex-column justify-content-center">
     <h4 class="text-center">
       Create Post
     </h4>
-
     <div class="d-flex align-items-center justify-content-between mt-4">
       <div>
         <span
           v-if="$v.tagPost.$dirty &&
             !$v.tagPost.required"
-          class="text-danger d-block"
+          class="text-danger"
         >Tag is required
         </span>
-        <b-form-input
-          v-model.trim="$v.tagPost.$model"
-          class=""
-          style="margin: 0; width: 350px;"
-          placeholder="Enter tag title eg: Fashion, Lifestyle, Travel..."
-        />
+        <div class="d-flex">
+          <span class="mr-2">
+            Tag:
+          </span>
+          <b-form-select v-model="$v.tagPost.$model" :options="options" />
+        </div>
       </div>
       <div>
         <span
@@ -75,9 +74,17 @@ export default {
     return {
       titlePost: '',
       descriptionPost: '',
-      tagPost: '',
       authorPost: '',
-      busy: false
+      busy: false,
+      tagPost: null,
+      options: [
+        { value: null, text: 'Select tag' },
+        { value: 'Shopping', text: 'Shopping' },
+        { value: 'Fashion', text: 'Fashion' },
+        { value: 'Lifestyle', text: 'Lifestyle' },
+        { value: 'Travel', text: 'Travel' },
+        { value: 'Hobbies', text: 'Hobbies' }
+      ]
     }
   },
   methods: {
@@ -96,11 +103,12 @@ export default {
     async onSubmit (description) {
       try {
         const formData = this.getFormData(description)
-        console.log(formData)
+        this.isLowerCase(formData)
         await this.$store.dispatch('posts/createPost', formData)
         this.cleaningForm()
         const message = 'Post created'
         this.makeToast('b-toaster-top-center', 'success', message)
+        await this.$router.push('/admin/list/posts')
       } catch (e) {
 
       } finally {
@@ -112,16 +120,22 @@ export default {
         title: this.titlePost,
         tag: this.tagPost,
         author: this.authorPost,
-        description
+        content: description
       }
     },
     cleaningForm () {
       this.$v.$reset()
       this.titlePost = ''
       this.descriptionPost = ''
+      this.authorPost = ''
+      this.tagPost = ''
     },
-    isLowerCase (text) {
-
+    isLowerCase (formData) {
+      for (const formDataKey in formData) {
+        if (formDataKey !== 'content') {
+          formData[formDataKey] = formData[formDataKey].toLowerCase()
+        }
+      }
     }
   },
   validations: {

@@ -13,10 +13,27 @@
         </b-breadcrumb-item>
       </b-breadcrumb>
     </div>
-    <div class="edit text-center">
-      <h4 class="mt-2">
+    <div class="edit">
+      <h4 class="mt-2 text-center">
         Edit post
       </h4>
+      <div class="post-detail">
+        <div>
+          <div>
+            <span class="ml-auto">{{ post.tag }}</span>
+          </div>
+          <b-icon icon="person" />
+          <span class="ml-2">{{ post.author }}</span>
+        </div>
+        <div>
+          <div class="text-right">
+            <span>{{ post.views }}</span>
+            <b-icon icon="eye" />
+          </div>
+          <b-icon icon="calendar-date" />
+          <span>{{ post.date }}</span>
+        </div>
+      </div>
 
       <b-form-input
         v-model="$v.title.$model"
@@ -24,12 +41,16 @@
         placeholder="Enter post title"
         class="mt-3 text-center"
       />
+
       <span
         v-if="$v.title.$dirty &&
           !$v.title.required"
         class="text-danger"
       >Title is required
       </span>
+
+      <div />
+
       <app-editor-tip-tap :method="'Refresh'" :description="description" />
     </div>
   </section>
@@ -49,19 +70,22 @@ export default {
   },
   mixins: [mixinToast],
   async asyncData ({ store, params }) {
-    const post = await store.dispatch('posts/getPostById', params.id)
+    const { data } = await store.dispatch('posts/getPostById', params.id)
+    const post = data
     return { post }
   },
   data () {
     return {
       title: '',
       description: '',
+      tag: '',
       busy: false
     }
   },
   beforeMount () {
     this.title = this.post.title
-    this.description = this.post.description
+    this.description = this.post.content
+    this.tag = this.post.tag
   },
 
   methods: {
@@ -92,6 +116,9 @@ export default {
     },
     description: {
       required
+    },
+    tag: {
+      required
     }
   }
 }
@@ -109,5 +136,10 @@ export default {
 }
 .list-post{
   width: 60%;
+}
+.post-detail{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 </style>

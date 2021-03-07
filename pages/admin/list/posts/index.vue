@@ -1,34 +1,31 @@
 <template>
   <div>
-    <b-table striped hover :items="posts" :fields="fields">
-      <template #cell(edit)="row">
-        <b-button
-          v-b-tooltip.hover
-          title="Edit post"
-          pill
-          variant="outline-success"
-        >
-          <b-icon icon="pencil-square" @click="openPost(row.item._id)" />
-        </b-button>
-        <b-button
-          v-b-tooltip.hover
-          title="Remove post"
-          pill
-          variant="outline-danger"
-          @click="removePost(row.item._id)"
-        >
-          <b-icon icon="x-square-fill" />
-        </b-button>
-      </template>
-      <template #cell(comments)="data">
-        {{ data.item.comments.length }}
-      </template>
-      <template #cell(tag)="data">
-        <div v-for="tag in data.item.tag" :key="tag">
-          {{ tag }}
-        </div>
-      </template>
-    </b-table>
+    <no-ssr>
+      <b-table striped hover :items="posts" :fields="fields">
+        <template #cell(edit)="row">
+          <b-button
+            v-b-tooltip.hover
+            title="Edit post"
+            pill
+            variant="outline-success"
+          >
+            <b-icon icon="pencil-square" @click="openPost(row.item._id)" />
+          </b-button>
+          <b-button
+            v-b-tooltip.hover
+            title="Remove post"
+            pill
+            variant="outline-danger"
+            @click="removePost(row.item._id)"
+          >
+            <b-icon icon="x-square-fill" />
+          </b-button>
+        </template>
+        <template #cell(comments)="data">
+          {{ data.item.comments.length }}
+        </template>
+      </b-table>
+    </no-ssr>
   </div>
 </template>
 
@@ -45,6 +42,7 @@ export default {
     const posts = await store.dispatch('posts/getPosts')
     return { posts }
   },
+
   data () {
     return {
       fields: [
@@ -72,7 +70,8 @@ export default {
         {
           key: 'edit'
         }
-      ]
+      ],
+      posts: null
     }
   },
   methods: {
@@ -83,7 +82,6 @@ export default {
       try {
         await this.confirm('Attention', 'Are you sure you want to delete the post?')
         await this.$store.dispatch('posts/removePost', id)
-        this.posts = this.posts.filter(post => index._id !== id)
         const message = 'Post deleted'
         this.makeToast('b-toaster-top-center', 'success', message)
       } catch (e) {

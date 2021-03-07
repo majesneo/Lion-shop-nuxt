@@ -13,11 +13,10 @@ const postSchema = new Schema({
     type: Number,
     default: 0
   },
-  tag: [
-    {
-      type: String
-    }
-  ],
+  tag: {
+    type: String,
+    required: true
+  },
   author: {
     type: String,
     required: true
@@ -34,4 +33,4 @@ const postSchema = new Schema({
   ]
 })
 
-module.exports = model('post', postSchema)
+module.exports = model('posts', postSchema)

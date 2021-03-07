@@ -72,13 +72,18 @@ import { required } from 'vuelidate/lib/validators'
 
 export default {
   name: 'BlogPostCommentForm',
+
+  props: {
+    postId: {
+      type: String,
+      required: true
+    }
+  },
   data () {
     return {
       comment: '',
       name: '',
-      busy: false,
-      dismissSecs: 5,
-      dismissCountDown: 0
+      busy: false
     }
   },
   validations: {
@@ -91,27 +96,32 @@ export default {
   },
 
   methods: {
-    onSubmit () {
+    async onSubmit () {
       this.$v.$touch()
       if (this.$v.$invalid) {
         this.busy = true
       } else {
         this.busy = true
-        /* const formData = {
-          name: this.name,
-          comment: this.comment,
-          postId: ''
-        } */
+        const formData = this.getFormData()
         try {
-          this.$emit('commentCreated')
+          const comment = await this.$store.dispatch('comment/create', formData)
+          this.$emit('commentCreated', comment)
         } catch (e) {
 
         } finally {
           this.busy = false
         }
       }
+    },
+    getFormData () {
+      return {
+        name: this.name,
+        text: this.comment,
+        postId: this.postId
+      }
     }
   }
+
 }
 </script>
 

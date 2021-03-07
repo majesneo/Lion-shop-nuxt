@@ -1,16 +1,17 @@
 const Post = require('../models/post.model')
 
 module.exports.create = async (req, res) => {
-  console.log(req.body)
   const post = new Post({
     title: req.body.title,
-    text: req.body.description,
-    imageUrl: `/${req.body.name}`
+    content: req.body.content,
+    author: req.body.author,
+    tag: req.body.tag
   })
   try {
     await post.save()
-    res.status(201).json()
+    res.status(201).json(post)
   } catch (e) {
+    res.status(500).json(e)
     console.log(e)
   }
 }
