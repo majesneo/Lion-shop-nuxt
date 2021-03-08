@@ -1,11 +1,13 @@
 const Post = require('../models/post.model')
+const Comment = require('../models/comment.model')
 
 module.exports.create = async (req, res) => {
   const post = new Post({
     title: req.body.title,
     content: req.body.content,
     author: req.body.author,
-    tag: req.body.tag
+    tag: req.body.tag,
+    imageURL: `/${req.file.filename}`
   })
   try {
     await post.save()
@@ -52,6 +54,7 @@ module.exports.update = async (req, res) => {
 module.exports.remove = async (req, res) => {
   try {
     await Post.deleteOne({ _id: req.params.id })
+    await Comment.deleteMany({ postId: req.params.id })
     res.json({ message: 'Пост удален' })
   } catch (e) {
     res.status(500).json(e)

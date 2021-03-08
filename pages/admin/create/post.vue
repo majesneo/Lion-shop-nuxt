@@ -27,7 +27,7 @@
         </span>
         <b-form-input
           v-model.trim="$v.authorPost.$model"
-          class="ml-auto"
+          class="ml-auto mb-2"
           style="margin: 0; width: 350px;"
           placeholder="Enter your name"
         />
@@ -44,8 +44,24 @@
         v-model="$v.titlePost.$model"
         style="margin: 0"
         placeholder="Enter post title"
-        class="text-center mt-2"
+        class="text-center mb-2"
       />
+      <span
+        v-if="$v.images.$dirty &&
+          !$v.images.required"
+        class="text-danger"
+      >Image is required
+      </span>
+      <div class="d-flex align-items-center justify-content-center">
+        <b-form-file
+          v-model="$v.images.$model"
+          accept=".jpg, .png, .gif"
+          multiple
+          :state="Boolean(images)"
+          placeholder="Choose a poster image or drop it here..."
+          drop-placeholder="Drop file here..."
+        />
+      </div>
     </div>
 
     <app-editor-tip-tap
@@ -54,6 +70,7 @@
       :description="descriptionPost"
       @checkDescrValid="isValid"
     />
+    <div />
   </div>
 </template>
 
@@ -75,15 +92,16 @@ export default {
       titlePost: '',
       descriptionPost: '',
       authorPost: '',
+      images: null,
       busy: false,
       tagPost: null,
       options: [
         { value: null, text: 'Select tag' },
-        { value: 'Shopping', text: 'Shopping' },
-        { value: 'Fashion', text: 'Fashion' },
-        { value: 'Lifestyle', text: 'Lifestyle' },
-        { value: 'Travel', text: 'Travel' },
-        { value: 'Hobbies', text: 'Hobbies' }
+        { value: 'shopping', text: 'Shopping' },
+        { value: 'fashion', text: 'Fashion' },
+        { value: 'lifestyle', text: 'Lifestyle' },
+        { value: 'travel', text: 'Travel' },
+        { value: 'hobbies', text: 'Hobbies' }
       ]
     }
   },
@@ -99,11 +117,9 @@ export default {
         this.busy = false
       }
     },
-
     async onSubmit (description) {
       try {
         const formData = this.getFormData(description)
-        this.isLowerCase(formData)
         await this.$store.dispatch('posts/createPost', formData)
         this.cleaningForm()
         const message = 'Post created'
@@ -117,9 +133,10 @@ export default {
     },
     getFormData (description) {
       return {
-        title: this.titlePost,
+        title: this.titlePost.toLowerCase(),
         tag: this.tagPost,
-        author: this.authorPost,
+        author: this.authorPost.toLowerCase(),
+        images: this.images,
         content: description
       }
     },
@@ -128,14 +145,6 @@ export default {
       this.titlePost = ''
       this.descriptionPost = ''
       this.authorPost = ''
-      this.tagPost = ''
-    },
-    isLowerCase (formData) {
-      for (const formDataKey in formData) {
-        if (formDataKey !== 'content') {
-          formData[formDataKey] = formData[formDataKey].toLowerCase()
-        }
-      }
     }
   },
   validations: {
@@ -146,6 +155,9 @@ export default {
       required
     },
     authorPost: {
+      required
+    },
+    images: {
       required
     }
   }

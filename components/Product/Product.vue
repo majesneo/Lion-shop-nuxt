@@ -62,12 +62,12 @@
               <a href="#">
                 <img src="../../assets/images/products/product-4-3-thumb.jpg" alt="product desc">
               </a>
-            </div><!-- End .product-nav -->
-          </div><!-- End .product-body -->
-        </div><!-- End .col-lg-6 -->
-      </div><!-- End .row -->
-    </div><!-- End .product -->
-  </div><!-- End .products -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>

@@ -1,7 +1,7 @@
 export default {
   methods: {
     async confirm (title, message) {
-      await this.$bvModal.msgBoxConfirm(message, {
+      return await this.$bvModal.msgBoxConfirm(message, {
         title,
         size: 'sm',
         buttonSize: 'sm',

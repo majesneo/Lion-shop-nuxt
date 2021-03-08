@@ -1,8 +1,7 @@
 <template>
   <div>
-    <app-title />
-    <app-breadcrumb />
-    <div class="page-content">
+    <app-title :title="$route.name" />
+    <div class="page-content mt-3">
       <div class="container">
         <div class="row">
           <div class="col-lg-9">
@@ -21,7 +20,6 @@
 
 <script>
 import AppTitle from '@/components/Title'
-import AppBreadcrumb from '@/components/Breadcrumb'
 import AppProductToolbox from '@/components/Product/ProductToolbox'
 import AppProduct from '@/components/Product/Product'
 import AppPagination from '@/components/Pagination'
@@ -30,7 +28,6 @@ export default {
   name: 'Index',
   components: {
     AppTitle,
-    AppBreadcrumb,
     AppProductToolbox,
     AppProduct,
     AppPagination

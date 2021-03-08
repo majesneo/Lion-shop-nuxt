@@ -56,7 +56,7 @@
 
           <nav class="main-nav">
             <ul class="menu sf-arrows">
-              <li class="megamenu-container active">
+              <li class="megamenu-container">
                 <nuxt-link to="/" class="sf-with-ul">
                   Home
                 </nuxt-link>
@@ -175,12 +175,12 @@
                 <a href="checkout.html" class="btn btn-outline-primary-2"><span>Checkout</span><i
                   class="icon-long-arrow-right"
                 /></a>
-              </div><!-- End .dropdown-cart-total -->
-            </div><!-- End .dropdown-menu -->
-          </div><!-- End .cart-dropdown -->
-        </div><!-- End .header-right -->
-      </div><!-- End .container-fluid -->
-    </div><!-- End .header-middle -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </header>
 </template>
 
@@ -191,5 +191,10 @@ export default {
 </script>
 
 <style scoped>
-
+ a.nuxt-link-active{
+  color: initial !important;
+}
+ a.nuxt-link-active.nuxt-link-exact-active{
+   color: #c96 !important;
+ }
 </style>

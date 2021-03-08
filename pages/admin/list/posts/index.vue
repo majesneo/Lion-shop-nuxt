@@ -24,6 +24,9 @@
         <template #cell(comments)="data">
           {{ data.item.comments.length }}
         </template>
+        <template #cell(date)="data">
+          {{ data.item.date | date }}
+        </template>
       </b-table>
     </no-ssr>
   </div>
@@ -74,14 +77,17 @@ export default {
       posts: null
     }
   },
+
   methods: {
     openPost (id) {
       this.$router.push(`/admin/list/posts/${id}`)
     },
     async removePost (id) {
       try {
-        await this.confirm('Attention', 'Are you sure you want to delete the post?')
+        const response = await this.confirm('Attention', 'Are you sure you want to delete the post?')
+        if (!response) { return }
         await this.$store.dispatch('posts/removePost', id)
+        this.posts = this.posts.filter(p => p._id !== id)
         const message = 'Post deleted'
         this.makeToast('b-toaster-top-center', 'success', message)
       } catch (e) {
@@ -91,7 +97,6 @@ export default {
       }
     }
   }
-
 }
 </script>
 <style scoped>

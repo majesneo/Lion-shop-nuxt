@@ -31,7 +31,7 @@
             <b-icon icon="eye" />
           </div>
           <b-icon icon="calendar-date" />
-          <span>{{ post.date }}</span>
+          <span>{{ post.date | date }}</span>
         </div>
       </div>
 
@@ -94,11 +94,9 @@ export default {
         this.$v.$touch()
       } else {
         this.busy = true
-        const formData = {
-          title: this.title,
-          description: this.description
-        }
+
         try {
+          const formData = this.getFormData()
           await this.$store.dispatch('posts/updatePost', formData)
           const message = 'Post updated'
           this.makeToast('b-toaster-top-center', 'success', message)
@@ -107,6 +105,12 @@ export default {
         } finally {
           this.busy = false
         }
+      }
+    },
+    getFormData () {
+      return {
+        title: this.title,
+        description: this.description
       }
     }
   },

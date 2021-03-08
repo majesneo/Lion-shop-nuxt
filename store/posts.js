@@ -35,9 +35,20 @@ export const actions = {
 
     }
   },
-  async createPost ({ commit }, formData) {
+  async createPost ({ commit }, { title, tag, author, images, content }) {
+    const formData = new FormData()
+    formData.append('title', title)
+    formData.append('tag', tag)
+    formData.append('author', author)
+    formData.append('content', content)
+    images.forEach((image) => {
+      formData.append('image', image, image.name)
+    })
+    formData.forEach((item) => {
+      console.log(item)
+    })
     try {
-      return await this.$axios.$post('/api/post/admin', formData)
+    /*  return await this.$axios.$post('/api/post/admin', formData) */
     } catch (e) {
       commit('setError', e, { root: true })
       throw e
