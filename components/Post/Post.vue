@@ -3,7 +3,7 @@
     <article class="entry entry-mask">
       <figure class="entry-media">
         <a href="#" @click.prevent="showPost">
-          <img src="assets/images/blog/mask/grid/post-1.jpg" alt="image desc">
+          <img class="entry-img" :src="post.imageURL" alt="image desc">
         </a>
       </figure>
       <div class="entry-body">
@@ -45,5 +45,9 @@ export default {
 </script>
 
 <style scoped>
-
+.entry-img{
+  width: 376px;
+  height: 376px;
+ object-fit: cover;
+}
 </style>

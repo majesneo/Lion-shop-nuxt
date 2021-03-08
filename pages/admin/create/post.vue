@@ -47,17 +47,16 @@
         class="text-center mb-2"
       />
       <span
-        v-if="$v.images.$dirty &&
-          !$v.images.required"
+        v-if="$v.image.$dirty &&
+          !$v.image.required"
         class="text-danger"
       >Image is required
       </span>
       <div class="d-flex align-items-center justify-content-center">
         <b-form-file
-          v-model="$v.images.$model"
+          v-model="$v.image.$model"
           accept=".jpg, .png, .gif"
-          multiple
-          :state="Boolean(images)"
+          :state="Boolean(image)"
           placeholder="Choose a poster image or drop it here..."
           drop-placeholder="Drop file here..."
         />
@@ -92,7 +91,7 @@ export default {
       titlePost: '',
       descriptionPost: '',
       authorPost: '',
-      images: null,
+      image: null,
       busy: false,
       tagPost: null,
       options: [
@@ -120,6 +119,7 @@ export default {
     async onSubmit (description) {
       try {
         const formData = this.getFormData(description)
+        console.log(formData)
         await this.$store.dispatch('posts/createPost', formData)
         this.cleaningForm()
         const message = 'Post created'
@@ -136,7 +136,7 @@ export default {
         title: this.titlePost.toLowerCase(),
         tag: this.tagPost,
         author: this.authorPost.toLowerCase(),
-        images: this.images,
+        image: this.image,
         content: description
       }
     },
@@ -157,7 +157,7 @@ export default {
     authorPost: {
       required
     },
-    images: {
+    image: {
       required
     }
   }

@@ -3,11 +3,11 @@
     <app-main-title :title="$route.name" />
     <the-post-nav class="mt-2" :posts="posts" @handlerTags="handlerTags" />
     <div class="page-content">
-      <div v-if="posts.length === 0" class="container">
+      <div class="container">
         <div class="entry-container" data-layout="fitRows">
           <app-post v-for="post in posts" :key="post._id" :post="post" />
 
-          <h6 class="text-center mt-3">
+          <h6 v-if="posts.length === 0" class="text-center mt-3">
             No posts
           </h6>
         </div>
