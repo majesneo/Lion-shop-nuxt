@@ -106,6 +106,7 @@ export default {
         try {
           const comment = await this.$store.dispatch('comment/create', formData)
           this.$emit('commentCreated', comment)
+          this.cleaningForm()
         } catch (e) {
 
         } finally {
@@ -119,6 +120,11 @@ export default {
         text: this.comment,
         postId: this.postId
       }
+    },
+    cleaningForm () {
+      this.$v.$reset()
+      this.comment = ''
+      this.name = ''
     }
   }
 
