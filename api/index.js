@@ -2,11 +2,13 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 const passport = require('passport')
-const authRoutes = require('./routes/auth.routes')
+const authAdminRoutes = require('./routes/admin/auth.routes')
+const productRoutes = require('./routes/product.routes')
+const authUserRoutes = require('./routes/user.routes')
 const passportStrategy = require('./middleware/passport-strategy')
 const keys = require('./keys')
-const postRoutes = require('./routes/post.routes')
-const commentRoutes = require('./routes/comment-posts.routes')
+const postRoutes = require('./routes/admin/post.routes')
+const commentRoutes = require('./routes/admin/comment-posts.routes')
 
 const app = express()
 
@@ -26,8 +28,10 @@ app.use(bodyParser.json({ limit: '50mb' }))
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }))
 
 app.use('/post', postRoutes)
-app.use('/auth', authRoutes)
+app.use('/admin', authAdminRoutes)
 app.use('/comment', commentRoutes)
+app.use('/user', authUserRoutes)
+app.use('/product', productRoutes)
 
 module.exports = app
 if (require.main === module) {

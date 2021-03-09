@@ -1,10 +1,10 @@
 const bcrypt = require('bcrypt-nodejs')
 const jwt = require('jsonwebtoken')
-const User = require('../models/user.model')
-const keys = require('../keys')
+const Admin = require('../../models/admin/admin-user.model')
+const keys = require('../../keys')
 
 module.exports.login = async (req, res) => {
-  const user = await User.findOne({ login: req.body.login })
+  const user = await Admin.findOne({ login: req.body.login })
   if (user) {
     const isCorrectPassword = bcrypt.compareSync(req.body.password, user.password)
 
@@ -22,13 +22,13 @@ module.exports.login = async (req, res) => {
     res.status(404).json({ message: 'User not found' })
   }
 }
-module.exports.createUser = async (req, res) => {
-  const user = await User.findOne({ login: req.body.login })
+module.exports.createAdmin = async (req, res) => {
+  const user = await Admin.findOne({ login: req.body.login })
   if (user) {
     res.status(409).json({ message: 'Username already exists' })
   } else {
     const salt = bcrypt.genSaltSync(10)
-    const user = new User({
+    const user = new Admin({
       login: req.body.login,
       password: bcrypt.hashSync(req.body.password, salt)
     })

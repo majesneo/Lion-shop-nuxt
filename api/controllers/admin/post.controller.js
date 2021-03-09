@@ -1,5 +1,5 @@
-const Post = require('../models/post.model')
-const Comment = require('../models/comment.model')
+const Post = require('../../models/admin/post.model')
+const Comment = require('../../models/admin/comment.model')
 
 module.exports.create = async (req, res) => {
   const post = new Post({
@@ -39,7 +39,8 @@ module.exports.getById = async (req, res) => {
 
 module.exports.update = async (req, res) => {
   const $set = {
-    text: req.body.text
+    title: req.body.title,
+    content: req.body.content
   }
   try {
     const post = await Post.findOneAndUpdate({

@@ -1,8 +1,8 @@
 const passport = require('passport')
 const { Router } = require('express')
 const router = Router()
-const postController = require('../controllers/post.controller')
-const upload = require('../middleware/upload')
+const postController = require('../../controllers/admin/post.controller')
+const upload = require('../../middleware/upload')
 
 router.post(
   '/admin',

@@ -51,7 +51,7 @@
 
       <div />
 
-      <app-editor-tip-tap :method="'Refresh'" :description="description" />
+      <app-editor-tip-tap :method="'Refresh'" :description="description" @checkDescrValid="isValid" />
     </div>
   </section>
 </template>
@@ -85,7 +85,6 @@ export default {
   beforeMount () {
     this.title = this.post.title
     this.description = this.post.content
-    this.tag = this.post.tag
   },
 
   methods: {
@@ -94,7 +93,6 @@ export default {
         this.$v.$touch()
       } else {
         this.busy = true
-
         try {
           const formData = this.getFormData()
           await this.$store.dispatch('posts/updatePost', formData)
@@ -109,8 +107,21 @@ export default {
     },
     getFormData () {
       return {
+        id: this.post._id,
         title: this.title,
-        description: this.description
+        content: this.description
+      }
+    },
+    isValid (description) {
+      this.$v.$touch()
+
+      if (description && !this.$v.$invalid) {
+        this.onSubmit(description)
+      } else {
+        this.$v.$touch()
+        const message = 'The form is not valid'
+        this.makeToast('b-toaster-top-center', 'danger', message)
+        this.busy = false
       }
     }
   },
@@ -119,9 +130,6 @@ export default {
       required
     },
     description: {
-      required
-    },
-    tag: {
       required
     }
   }

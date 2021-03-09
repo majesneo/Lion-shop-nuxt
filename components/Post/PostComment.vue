@@ -33,7 +33,8 @@ export default {
   name: 'BlogPostComment',
   props: {
     comment: {
-      type: String
+      type: Object,
+      default: null
     }
   }
 }

@@ -1,6 +1,6 @@
 const { Router } = require('express')
 const router = Router()
-const { create } = require('../controllers/comment-posts.controller')
+const { create } = require('../../controllers/admin/comment-posts.controller')
 
 router.post('/', create)
 

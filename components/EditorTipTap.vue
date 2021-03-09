@@ -221,8 +221,15 @@ export default {
     }
   },
   computed: {
-    showDescriptionPost () {
-      return this.description ? this.description : this.contentPost
+    postDescription () {
+      console.log('computed' + this.description)
+      return this.description
+    }
+  },
+  watch: {
+    postDescription (description) {
+      console.log('content' + this.contentPost, 'descr' + description)
+      this.contentPost = description
     }
   },
   mounted () {
@@ -247,7 +254,7 @@ export default {
         new Underline(),
         new History()
       ],
-      content: `${this.showDescriptionPost}`,
+      content: `${this.contentPost}`,
       onUpdate: ({ getHTML }) => {
         this.changed = true
         const html = getHTML()

@@ -24,15 +24,12 @@ export const actions = {
       throw e
     }
   },
-  async updatePost ({}, { id, text }) {
+  async updatePost ({ commit }, { id, content, title }) {
     try {
-      return await new Promise((resolve) => {
-        setTimeout(() => {
-          resolve()
-        }, 1000)
-      })
+      return await this.$axios.$put(`/api/post/admin/${id}`, { title, content })
     } catch (e) {
-
+      commit('setError', e, { root: true })
+      throw e
     }
   },
   async createPost ({ commit }, { title, tag, author, image, content }) {

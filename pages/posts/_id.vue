@@ -5,7 +5,7 @@
         <div class="col-lg-9">
           <article class="entry single-entry">
             <div class="entry-body">
-              <div class="entry-meta">
+              <div class="entry-meta mb-2">
                 <span class="entry-author">
                   by <a style="text-transform: capitalize" href="#">{{ post.author }}</a>
                 </span>

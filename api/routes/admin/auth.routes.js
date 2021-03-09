@@ -1,12 +1,12 @@
 const { Router } = require('express')
 const passport = require('passport')
-const { login, createUser } = require('../controllers/auth.controller')
+const { login, createAdmin } = require('../../controllers/admin/auth.controller')
 const router = Router()
 
-router.post('/admin/login', login)
-router.post('/admin/create/user',
+router.post('/auth/login', login)
+router.post('/auth/create/user',
   passport.authenticate('jwt', { session: false }),
-  createUser
+  createAdmin
 )
 
 module.exports = router
