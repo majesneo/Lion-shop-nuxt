@@ -5,13 +5,7 @@ const colorSchema = new Schema({
     type: String,
     required: true,
     unique: true
-  },
-  size: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: 'size'
-    }
-  ]
+  }
 })
 
 module.exports = model('color', colorSchema)

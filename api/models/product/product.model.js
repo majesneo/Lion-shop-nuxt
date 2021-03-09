@@ -10,7 +10,7 @@ const productSchema = new Schema({
   color: [
     {
       type: Schema.Types.ObjectId,
-      ref: 'colors'
+      ref: 'color'
     }
   ],
   size: [

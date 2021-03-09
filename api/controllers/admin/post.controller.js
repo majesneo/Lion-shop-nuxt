@@ -11,10 +11,12 @@ module.exports.create = async (req, res) => {
   })
   try {
     await post.save()
-    res.status(201).json(post)
+    res.status(201).json({
+      success: true,
+      message: `Your post: ${post} created`
+    })
   } catch (e) {
     res.status(500).json(e)
-    console.log(e)
   }
 }
 

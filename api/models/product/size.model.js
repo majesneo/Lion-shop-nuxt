@@ -6,13 +6,7 @@ const sizeSchema = new Schema({
     required: true,
     unique: true,
     default: ['XS', 'S', 'M', 'L', 'XL', 'XXL']
-  },
-  color: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: 'color'
-    }
-  ]
+  }
 })
 
 module.exports = model('size', sizeSchema)
