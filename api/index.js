@@ -4,7 +4,7 @@ const mongoose = require('mongoose')
 const passport = require('passport')
 const authAdminRoutes = require('./routes/admin/auth.routes')
 const productRoutes = require('./routes/product.routes')
-const authUserRoutes = require('./routes/user.routes')
+/* const authUserRoutes = require('./routes/user.routes') */
 const passportStrategy = require('./middleware/passport-strategy')
 const keys = require('./keys')
 const postRoutes = require('./routes/admin/post.routes')
@@ -30,7 +30,7 @@ app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }))
 app.use('/post', postRoutes)
 app.use('/admin', authAdminRoutes)
 app.use('/comment', commentRoutes)
-app.use('/user', authUserRoutes)
+/* app.use('/user', authUserRoutes) */
 app.use('/product', productRoutes)
 
 module.exports = app

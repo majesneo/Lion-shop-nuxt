@@ -87,7 +87,7 @@ export default {
         const response = await this.confirm('Attention', 'Are you sure you want to delete the post?')
         if (!response) { return }
         await this.$store.dispatch('posts/removePost', id)
-        this.posts = this.posts.filter(p => p._id !== id)
+        this.removeOnClient(id)
         const message = 'Post deleted'
         this.makeToast('b-toaster-top-center', 'success', message)
       } catch (e) {
@@ -95,6 +95,9 @@ export default {
         this.makeToast('b-toaster-top-center', 'danger', message)
         throw e
       }
+    },
+    removeOnClient (id) {
+      this.posts = this.posts.filter(p => p._id !== id)
     }
   }
 }

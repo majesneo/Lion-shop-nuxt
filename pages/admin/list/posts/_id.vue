@@ -88,16 +88,17 @@ export default {
   },
 
   methods: {
-    async onSubmit () {
+    async onSubmit (description) {
       if (this.$v.$invalid) {
         this.$v.$touch()
       } else {
         this.busy = true
         try {
-          const formData = this.getFormData()
+          const formData = this.getFormData(description)
           await this.$store.dispatch('posts/updatePost', formData)
           const message = 'Post updated'
           this.makeToast('b-toaster-top-center', 'success', message)
+          await this.$router.push('/admin/list/posts')
         } catch (e) {
 
         } finally {
@@ -105,16 +106,15 @@ export default {
         }
       }
     },
-    getFormData () {
+    getFormData (description = this.description) {
       return {
         id: this.post._id,
         title: this.title,
-        content: this.description
+        content: description
       }
     },
     isValid (description) {
       this.$v.$touch()
-
       if (description && !this.$v.$invalid) {
         this.onSubmit(description)
       } else {

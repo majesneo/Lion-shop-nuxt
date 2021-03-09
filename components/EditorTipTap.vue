@@ -226,12 +226,6 @@ export default {
       return this.description
     }
   },
-  watch: {
-    postDescription (description) {
-      console.log('content' + this.contentPost, 'descr' + description)
-      this.contentPost = description
-    }
-  },
   mounted () {
     this.editor = new Editor({
       extensions: [
@@ -254,7 +248,7 @@ export default {
         new Underline(),
         new History()
       ],
-      content: `${this.contentPost}`,
+      content: `${this.postDescription}`,
       onUpdate: ({ getHTML }) => {
         this.changed = true
         const html = getHTML()

@@ -94,29 +94,33 @@ export default {
       if (this.$v.$invalid) {
         this.$v.$touch()
         this.busy = true
-        console.log('invalid')
       } else {
         this.busy = true
-        const formData = {
-          username: this.username,
-          password: this.password
-        }
+        const formData = this.getFormData()
         try {
           await this.$store.dispatch('auth-admin/createUser', formData)
-          this.$v.$reset()
-          this.username = ''
-          this.password = ''
+          this.cleaningForm()
           const message = 'User created'
           this.makeToast('b-toaster-top-center', 'success', message)
         } catch (e) {
 
         } finally {
-          new Promise(resolve => setTimeout(() => {
-            resolve(this.busy = false)
-          }, 2000))
+          this.busy = false
         }
       }
+    },
+    getFormData () {
+      return {
+        username: this.username,
+        password: this.password
+      }
+    },
+    cleaningForm () {
+      this.$v.$reset()
+      this.username = ''
+      this.password = ''
     }
+
   }
 
 }
