@@ -19,7 +19,6 @@ export const actions = {
   async login ({ commit, dispatch }, formData) {
     try {
       const { token } = await this.$axios.$post('/api/admin/auth/login', formData)
-      console.log(token)
       dispatch('setToken', token)
     } catch (e) {
       commit('setError', e, { root: true })
@@ -51,8 +50,7 @@ export const actions = {
   },
   async createUser ({ commit }, formData) {
     try {
-      const { user } = await this.$axios.$post('/api/admin/create/user', formData)
-      console.log(user)
+      return await this.$axios.$post('/api/admin/create/user', formData)
     } catch (e) {
       commit('setError', e, { root: true })
       throw e

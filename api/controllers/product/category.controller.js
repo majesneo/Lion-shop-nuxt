@@ -8,6 +8,7 @@ module.exports.create = async (req, res) => {
     await category.save()
     res.status(201).json(category)
   } catch (e) {
+    console.log(e)
     res.status(500).json(e)
   }
 }

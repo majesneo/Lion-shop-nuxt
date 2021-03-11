@@ -4,11 +4,15 @@ module.exports.create = async (req, res) => {
   try {
     const product = new Product({
       title: req.body.title,
+      category: req.body.category,
       description: req.body.description,
       quantity: req.body.quantity,
       sex: req.body.sex,
-      photo: req.file.location,
-      price: req.body.price
+      photo: req.files,
+      price: req.body.price,
+      brand: req.body.brand,
+      color: req.body.color,
+      size: req.body.size
     })
     await product.save()
     res.status(201).json(product)
@@ -29,6 +33,7 @@ module.exports.getAll = async (req, res) => {
 module.exports.getById = async (req, res) => {
   try {
     const product = await Product.findById(req.params.id)
+
     res.json(product)
   } catch (e) {
     res.status(500).json(e)

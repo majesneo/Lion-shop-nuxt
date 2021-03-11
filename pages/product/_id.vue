@@ -1,5 +1,5 @@
 <template>
-  <div class="page-content">
+  <section class="page-content">
     <div class="container">
       <div class="product-details-top">
         <div class="row">
@@ -568,7 +568,7 @@
         </carousel>
       </no-ssr>
     </div><!-- End .container -->
-  </div><!-- End .page-content -->
+  </section><!-- End .page-content -->
 </template>
 
 <script>

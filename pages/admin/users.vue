@@ -1,5 +1,5 @@
 <template>
-  <div class="form-box mt-9">
+  <section class="form-box mt-9">
     <div class="form-tab">
       <ul class="nav nav-pills nav-fill" role="tablist">
         <li class="nav-item">
@@ -62,7 +62,7 @@
         </div>
       </form>
     </div>
-  </div>
+  </section>
 </template>
 
 <script>

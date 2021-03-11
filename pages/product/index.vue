@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <section>
     <app-title :title="$route.name" />
     <div class="page-content mt-3">
       <div class="container">
@@ -15,7 +15,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </section>
 </template>
 
 <script>

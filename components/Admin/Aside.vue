@@ -13,6 +13,9 @@
     <b-nav-item to="/admin/create">
       <b-icon icon="tools" />
       Create
+      <b-dropdown-item to="/admin/create/category">
+        Category
+      </b-dropdown-item>
       <b-dropdown-item to="/admin/create/products">
         Products
       </b-dropdown-item>

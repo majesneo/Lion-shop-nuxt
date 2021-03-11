@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <section>
     <no-ssr>
       <b-table striped hover :items="posts" :fields="fields">
         <template #cell(edit)="row">
@@ -29,7 +29,7 @@
         </template>
       </b-table>
     </no-ssr>
-  </div>
+  </section>
 </template>
 
 <script>

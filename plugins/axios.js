@@ -14,6 +14,7 @@ export default function ({ $axios, redirect, store }) {
         store.dispatch('auth-admin/logout')
       }
       if (err.response.status === 500) {
+        // eslint-disable-next-line
         console.error('Server 500 error')
       }
     }

@@ -1,32 +1,24 @@
 const { model, Schema } = require('mongoose')
 
 const productSchema = new Schema({
-  category: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: 'category'
-    }
-  ],
-  color: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: 'color'
-    }
-  ],
-  size: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: 'size'
-    }
-  ],
-  title: String,
   brand: String,
+  title: String,
   description: String,
   quantity: Number,
-  sex: String,
-  photo: String,
-  price: Number,
-  rating: [Number],
+  category: {
+    type: Schema.Types.ObjectId,
+    ref: 'category'
+  },
+  characteristic: {
+    color: String,
+    photo: [Object],
+    size: String,
+    rating: [Number],
+    sex: String
+  },
+  pricing: {
+    price: Number
+  },
   date: {
     type: Date,
     default: Date.now

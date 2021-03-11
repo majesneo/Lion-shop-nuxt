@@ -1,5 +1,5 @@
 <template>
-  <div class="create-post mt-3  d-flex flex-column justify-content-center">
+  <section class="create-post mt-3  d-flex flex-column justify-content-center">
     <h4 class="text-center">
       Create Post
     </h4>
@@ -70,7 +70,7 @@
       @checkDescrValid="isValid"
     />
     <div />
-  </div>
+  </section>
 </template>
 
 <script>
@@ -119,7 +119,6 @@ export default {
     async onSubmit (description) {
       try {
         const formData = this.getFormData(description)
-        console.log(formData)
         await this.$store.dispatch('posts/createPost', formData)
         this.cleaningForm()
         const message = 'Post created'
@@ -170,6 +169,8 @@ export default {
 }
 .create-post{
   width: 60%;
+  box-shadow: 0 3px 16px rgb(51 51 51 / 10%);
+  padding: 20px;
 }
 
 </style>

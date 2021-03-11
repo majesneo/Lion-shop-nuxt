@@ -1,5 +1,5 @@
 <template>
-  <div class="page-content">
+  <section class="page-content">
     <app-main-title :title="$route.name" />
     <the-post-nav class="mt-2" :posts="posts" @handlerTags="handlerTags" />
     <div class="page-content">
@@ -14,7 +14,7 @@
       </div>
     </div>
     <app-pagination />
-  </div>
+  </section>
 </template>
 
 <script>
@@ -34,6 +34,7 @@ export default {
   },
   async asyncData ({ store }) {
     const posts = await store.dispatch('posts/getPosts')
+
     return { posts }
   },
   data () {
@@ -43,7 +44,6 @@ export default {
   },
   methods: {
     handlerTags (eventTag) {
-      console.log(eventTag)
     }
   }
 }

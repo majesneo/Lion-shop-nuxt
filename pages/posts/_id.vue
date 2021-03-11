@@ -1,5 +1,5 @@
 <template>
-  <div class="page-content">
+  <section class="page-content">
     <div class="container">
       <div class="row">
         <div class="col-lg-9">
@@ -18,7 +18,7 @@
               <h2 style="text-transform: capitalize" class="entry-title">
                 {{ post.title }}
               </h2>
-
+              <!--              eslint-disable-next-line-->
               <div class="entry-content editor-content" v-html="post.content" />
               <div class="entry-footer row no-gutters flex-column flex-md-row">
                 <div class="col-md">
@@ -117,7 +117,7 @@
         <the-post-aside />
       </div>
     </div>
-  </div>
+  </section>
 </template>
 
 <script>

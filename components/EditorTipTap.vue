@@ -222,7 +222,6 @@ export default {
   },
   computed: {
     postDescription () {
-      console.log('computed' + this.description)
       return this.description
     }
   },

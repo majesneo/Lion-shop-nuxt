@@ -2,7 +2,7 @@ const router = require('express').Router()
 const productCtr = require('../../controllers/product/product.controller')
 const upload = require('../../middleware/upload')
 
-router.post('/create', upload.single('photo'), productCtr.create)
+router.post('/create', upload.array('photo'), productCtr.create)
 
 router.get('/', productCtr.getAll)
 router.get('/:id', productCtr.getById)

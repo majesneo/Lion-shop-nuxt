@@ -10,7 +10,6 @@ export const actions = {
 
 export const mutations = {
   setError (state, error) {
-    console.log(error)
     state.error = error
   },
   clearError (state) {

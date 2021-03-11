@@ -1,7 +1,9 @@
 <template>
   <b-row>
     <b-col md="2">
-      <app-aside />
+      <aside>
+        <app-aside />
+      </aside>
     </b-col>
     <b-col md="10">
       <nuxt />
@@ -27,7 +29,7 @@ export default {
   },
   watch: {
     error (message) {
-      this.makeToast('b-toaster-top-center', 'danger', message.response.data.error.message)
+      this.makeToast('b-toaster-top-center', 'danger', message)
     }
   }
 }
