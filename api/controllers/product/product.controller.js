@@ -6,13 +6,9 @@ module.exports.create = async (req, res) => {
       title: req.body.title,
       category: req.body.category,
       description: req.body.description,
-      quantity: req.body.quantity,
       sex: req.body.sex,
-      photo: req.files,
       price: req.body.price,
-      brand: req.body.brand,
-      color: req.body.color,
-      size: req.body.size
+      brand: req.body.brand
     })
     await product.save()
     res.status(201).json(product)

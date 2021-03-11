@@ -93,6 +93,7 @@
       <b-form-input
         v-model.trim="$v.color.$model"
         class="text-center"
+        type="text"
         placeholder="Enter color"
       />
       <label class="mb-0">Price</label>
@@ -105,6 +106,7 @@
       <b-form-input
         v-model.trim="$v.price.$model"
         type="number"
+        step="0.01"
         class="text-center"
         placeholder="Enter price"
       />
@@ -218,12 +220,10 @@ export default {
         this.busy = true
         try {
           this.busy = true
-          const formData = this.getFormData()
-          console.log(formData)
-          formData.forEach((item) => {
-            console.log(item)
-          })
-          await this.$store.dispatch('products/createProduct', formData)
+          const dataProduct = this.getFormDataProduct()
+          const dataDetailsProduct = this.getFormDataDetailsProduct()
+          await this.$store.dispatch('products/createProduct', dataProduct)
+          await this.$store.dispatch('products/createDetailsProduct', dataDetailsProduct)
           const message = `Product ${this.title} created`
           this.makeToast('b-toaster-top-center', 'success', message)
         } catch (e) {
@@ -233,17 +233,21 @@ export default {
         }
       }
     },
-    getFormData () {
+    getFormDataProduct () {
       const data = new FormData()
       data.append('sex', this.selectSex)
       data.append('category', this.selectCategory)
-      data.append('title', this.title)
-      data.append('quantity', this.quantity)
-      data.append('size', this.selectSize)
+      data.append('title', this.title.toLowerCase())
       data.append('description', this.description)
-      data.append('color', this.color.toLowerCase())
       data.append('price', this.price)
       data.append('brand', this.brand.toLowerCase())
+      return data
+    },
+    getFormDataDetailsProduct () {
+      const data = new FormData()
+      data.append('quantity', this.quantity)
+      data.append('size', this.selectSize)
+      data.append('color', String(this.color).toLowerCase())
       this.photo.forEach((image) => {
         data.append('photo', image, image.name)
       })

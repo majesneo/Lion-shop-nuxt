@@ -4,18 +4,19 @@ const productSchema = new Schema({
   brand: String,
   title: String,
   description: String,
-  quantity: Number,
   category: {
     type: Schema.Types.ObjectId,
     ref: 'category'
   },
-  characteristic: {
-    color: String,
-    photo: [Object],
-    size: String,
-    rating: [Number],
-    sex: String
+  reviews: {
+    type: Schema.Types.ObjectId,
+    ref: 'reviews'
   },
+  details: {
+    type: Schema.Types.ObjectId,
+    ref: 'details'
+  },
+  sex: String,
   pricing: {
     price: Number
   },
