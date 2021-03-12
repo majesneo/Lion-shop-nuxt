@@ -6,9 +6,11 @@ module.exports.create = async (req, res) => {
       color: req.body.color,
       photo: req.files,
       size: req.body.size,
-      quantity: req.body.quantity
+      quantity: req.body.quantity,
+      productId: req.body.productId
     })
     await details.save()
+    res.status(201).json(details)
   } catch (e) {
     res.status(500).json(e)
   }

@@ -28,8 +28,7 @@ export default {
   },
   watch: {
     error (message) {
-      console.dir(message)
-      this.makeToast('b-toaster-top-center', 'danger', message)
+      this.makeToast('b-toaster-top-center', 'danger', message.response.data.error.message || message)
     }
   }
 }

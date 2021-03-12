@@ -8,6 +8,7 @@ const passportStrategy = require('./middleware/passport-strategy')
 
 const authAdminRoutes = require('./routes/admin/auth.routes')
 const productRoutes = require('./routes/product/product.routes')
+const detailsRoutes = require('./routes/product/details.routes')
 /* const authUserRoutes = require('./routes/user.routes') */
 const categoryRoutes = require('./routes/product/category.routes')
 const postRoutes = require('./routes/admin/post.routes')
@@ -36,6 +37,7 @@ app.use('/admin', authAdminRoutes)
 app.use('/comment', commentRoutes)
 /* app.use('/user', authUserRoutes) */
 app.use('/product', productRoutes)
+app.use('/product/details', detailsRoutes)
 app.use('/category', categoryRoutes)
 
 module.exports = app

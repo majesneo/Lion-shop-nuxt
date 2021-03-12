@@ -221,8 +221,8 @@ export default {
         try {
           this.busy = true
           const dataProduct = this.getFormDataProduct()
-          const dataDetailsProduct = this.getFormDataDetailsProduct()
-          await this.$store.dispatch('products/createProduct', dataProduct)
+          const { _id } = await this.$store.dispatch('products/createProduct', dataProduct)
+          const dataDetailsProduct = this.getFormDataDetailsProduct(_id)
           await this.$store.dispatch('products/createDetailsProduct', dataDetailsProduct)
           const message = `Product ${this.title} created`
           this.makeToast('b-toaster-top-center', 'success', message)
@@ -234,17 +234,18 @@ export default {
       }
     },
     getFormDataProduct () {
-      const data = new FormData()
-      data.append('sex', this.selectSex)
-      data.append('category', this.selectCategory)
-      data.append('title', this.title.toLowerCase())
-      data.append('description', this.description)
-      data.append('price', this.price)
-      data.append('brand', this.brand.toLowerCase())
-      return data
+      return {
+        sex: this.selectSex,
+        category: this.selectCategory,
+        title: this.title.toLowerCase(),
+        description: this.description,
+        price: this.price,
+        brand: this.brand.toLowerCase()
+      }
     },
-    getFormDataDetailsProduct () {
+    getFormDataDetailsProduct (productId) {
       const data = new FormData()
+      data.append('productId', productId)
       data.append('quantity', this.quantity)
       data.append('size', this.selectSize)
       data.append('color', String(this.color).toLowerCase())

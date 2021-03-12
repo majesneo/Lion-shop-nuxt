@@ -1,14 +1,26 @@
 const { model, Schema } = require('mongoose')
 
 const reviewsSchema = new Schema({
-  name: String,
-  rating: Number,
+  name: {
+    type: String,
+    required: true
+  },
+  rating: {
+    type: Number,
+    required: true
+  },
   date: {
     type: Date,
     default: Date.now
   },
-  title: String,
-  description: String,
+  title: {
+    type: String,
+    required: true
+  },
+  description: {
+    type: String,
+    required: true
+  },
   like: {
     type: Number,
     default: 0

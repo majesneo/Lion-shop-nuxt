@@ -6,7 +6,7 @@ const detailsSchema = new Schema({
     required: true
   },
   photo: {
-    type: [Object],
+    type: Object,
     required: true
   },
   size: {
