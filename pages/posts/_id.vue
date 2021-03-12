@@ -13,6 +13,10 @@
                 <a href="#">{{ post.date | date }}</a>
                 <span class="meta-separator">|</span>
                 <a href="#">{{ post.comments.length }} Comments</a>
+                <span class="meta-separator">|</span>
+                <a href="#">{{ post.views }}
+                  <b-icon icon="eye" />
+                </a>
               </div>
 
               <h2 style="text-transform: capitalize" class="entry-title">
@@ -138,6 +142,12 @@ export default {
     const { data } = await store.dispatch('posts/getPostById', params.id)
     const post = data
     return { post }
+  },
+  async mounted () {
+    await this.$store.dispatch('posts/addViews', this.post)
+    return {
+      post: { ...this.post, views: ++this.post.views }
+    }
   },
   validate ({ params }) {
     return Boolean(params.id)

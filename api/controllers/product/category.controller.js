@@ -20,3 +20,12 @@ module.exports.getAll = async (req, res) => {
     res.status(500).json(e)
   }
 }
+
+module.exports.getById = async (req, res) => {
+  try {
+    const category = await Category.findById(req.params.id)
+    res.static(200).json(category)
+  } catch (e) {
+    res.status(500).json(e)
+  }
+}

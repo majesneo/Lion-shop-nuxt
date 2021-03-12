@@ -15,5 +15,13 @@ export const actions = {
       commit('setError', e, { root: true })
       throw e
     }
+  },
+  async getProducts ({ commit }) {
+    try {
+      return await this.$axios.$get('api/product')
+    } catch (e) {
+      commit('setError', e, { root: true })
+      throw e
+    }
   }
 }

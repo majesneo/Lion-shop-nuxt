@@ -8,6 +8,14 @@ export const actions = {
       throw e
     }
   },
+  async addViews ({ commit }, { _id, views }) {
+    try {
+      return await this.$axios.$put(`/api/post/views/${_id}`, { views })
+    } catch (e) {
+      commit('setError', e, { root: true })
+      throw e
+    }
+  },
   async removePost ({ commit }, id) {
     try {
       return await this.$axios.$delete(`/api/post/admin/${id}`)

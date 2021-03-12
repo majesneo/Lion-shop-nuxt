@@ -226,6 +226,7 @@ export default {
           await this.$store.dispatch('products/createDetailsProduct', dataDetailsProduct)
           const message = `Product ${this.title} created`
           this.makeToast('b-toaster-top-center', 'success', message)
+          await this.$router.push('/admin/list/products')
         } catch (e) {
 
         } finally {
