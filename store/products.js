@@ -40,7 +40,25 @@ export const actions = {
       throw e
     }
   },
-  async updateProduct ({ commit }, id) {
+  async updateProduct ({ commit }, { id }, updatedData) {
+    console.log(id)
+    console.log(updatedData)
+    try {
+      return await this.$axios.$get(`api/product/details/${id}`, updatedData)
+    } catch (e) {
+      commit('setError', e, { root: true })
+      throw e
+    }
+  },
+  async updateProductDetails ({ commit }, id) {
+    try {
+      return await this.$axios.$get(`api/product/details/${id}`)
+    } catch (e) {
+      commit('setError', e, { root: true })
+      throw e
+    }
+  },
+  async addColorProduct ({ commit }, id) {
     try {
       return await this.$axios.$get(`api/product/details/${id}`)
     } catch (e) {
