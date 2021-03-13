@@ -8,10 +8,14 @@ const productSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'category'
   },
-  /* reviews: {
+  categoryName: {
+    type: String,
+    required: true
+  },
+  reviews: {
     type: Schema.Types.ObjectId,
     ref: 'reviews'
-  }, */
+  },
   details: {
     type: Schema.Types.ObjectId,
     ref: 'details'

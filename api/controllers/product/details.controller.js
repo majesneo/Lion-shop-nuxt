@@ -15,3 +15,12 @@ module.exports.create = async (req, res) => {
     res.status(500).json(e)
   }
 }
+
+module.exports.getById = async (req, res) => {
+  try {
+    const details = await Details.findOne({ productId: req.params.id })
+    res.json(details)
+  } catch (e) {
+    res.status(500).json(e)
+  }
+}

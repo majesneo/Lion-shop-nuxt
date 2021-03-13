@@ -9,14 +9,14 @@
             pill
             variant="outline-success"
           >
-            <b-icon icon="pencil-square" @click="openPost(row.item._id)" />
+            <b-icon icon="pencil-square" @click="editProduct(row.item._id)" />
           </b-button>
           <b-button
             v-b-tooltip.hover
             title="Remove post"
             pill
             variant="outline-danger"
-            @click="removePost(row.item._id)"
+            @click="removeProduct(row.item._id)"
           >
             <b-icon icon="x-square-fill" />
           </b-button>
@@ -50,6 +50,14 @@ export default {
     return {
       fields: [
         {
+          key: 'categoryName',
+          sortable: true
+        },
+        {
+          key: 'sex',
+          sortable: true
+        },
+        {
           key: 'title'
         },
         {
@@ -61,7 +69,8 @@ export default {
           sortable: true
         },
         {
-          key: 'date'
+          key: 'date',
+          sortable: true
         },
         {
           key: 'edit'
@@ -72,12 +81,12 @@ export default {
   },
 
   methods: {
-    openPost (id) {
-      this.$router.push(`/admin/list/posts/${id}`)
+    editProduct (id) {
+      this.$router.push(`/admin/list/products/${id}`)
     },
-    async removePost (id) {
+    async removeProduct (id) {
       try {
-        const response = await this.confirm('Attention', 'Are you sure you want to delete the post?')
+        const response = await this.confirm('Attention', 'Are you sure you want to delete this post?')
         if (!response) { return }
         await this.$store.dispatch('posts/removePost', id)
         this.removeOnClient(id)

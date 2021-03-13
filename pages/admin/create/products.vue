@@ -26,7 +26,7 @@
         <b-form-select-option
           v-for="catItem in category"
           :key="catItem._id"
-          :value="catItem._id"
+          :value="{id:catItem._id, title:catItem.title}"
         >
           {{ catItem.title }}
         </b-form-select-option>
@@ -237,7 +237,8 @@ export default {
     getFormDataProduct () {
       return {
         sex: this.selectSex,
-        category: this.selectCategory,
+        categoryName: this.selectCategory.title,
+        category: this.selectCategory.id,
         title: this.title.toLowerCase(),
         description: this.description,
         price: this.price,

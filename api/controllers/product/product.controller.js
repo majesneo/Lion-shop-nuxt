@@ -5,6 +5,7 @@ module.exports.create = async (req, res) => {
     const product = new Product({
       title: req.body.title,
       category: req.body.category,
+      categoryName: req.body.categoryName,
       description: req.body.description,
       sex: req.body.sex,
       price: req.body.price,
@@ -29,7 +30,6 @@ module.exports.getAll = async (req, res) => {
 module.exports.getById = async (req, res) => {
   try {
     const product = await Product.findById(req.params.id)
-
     res.json(product)
   } catch (e) {
     res.status(500).json(e)

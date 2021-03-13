@@ -23,5 +23,29 @@ export const actions = {
       commit('setError', e, { root: true })
       throw e
     }
+  },
+  async getProductById ({ commit }, id) {
+    try {
+      return await this.$axios.$get(`api/product/${id}`)
+    } catch (e) {
+      commit('setError', e, { root: true })
+      throw e
+    }
+  },
+  async getProductDetailsById ({ commit }, id) {
+    try {
+      return await this.$axios.$get(`api/product/details/${id}`)
+    } catch (e) {
+      commit('setError', e, { root: true })
+      throw e
+    }
+  },
+  async updateProduct ({ commit }, id) {
+    try {
+      return await this.$axios.$get(`api/product/details/${id}`)
+    } catch (e) {
+      commit('setError', e, { root: true })
+      throw e
+    }
   }
 }
