@@ -75,8 +75,7 @@ export default {
       }
     },
     getEventData (value) {
-      console.log(321)
-      console.log(value)
+
     }
   }
 

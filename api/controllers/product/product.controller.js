@@ -22,9 +22,10 @@ module.exports.getAll = async (req, res) => {
   try {
     await Product.find()
       .populate('category')
+      .populate('details')
       .lean()
-      .exec((err, product) => {
-        res.json(product)
+      .exec((err, products) => {
+        res.json(products)
       })
   } catch (e) {
     res.status(500).json(e)

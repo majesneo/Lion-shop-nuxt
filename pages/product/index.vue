@@ -6,7 +6,7 @@
         <div class="row">
           <div class="col-lg-9">
             <app-product-toolbox />
-            <app-product />
+            <app-product :products="products" />
             <app-pagination />
           </div>
           <aside class="col-lg-3 order-lg-first">
@@ -31,6 +31,10 @@ export default {
     AppProductToolbox,
     AppProduct,
     AppPagination
+  },
+  async asyncData ({ store }) {
+    const products = await store.dispatch('products/getProducts')
+    return { products }
   }
 }
 </script>
