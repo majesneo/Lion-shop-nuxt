@@ -11,7 +11,7 @@ module.exports.create = async (req, res) => {
       productId: req.body.productId
     })
     await details.save()
-    const product = await Product.findById(req.body.productId)
+    const product = await Product.findById(req.body.productId).lean()
     product.details.push(details._id)
     await product.save()
     res.status(201).json(details)
@@ -23,7 +23,7 @@ module.exports.create = async (req, res) => {
 
 module.exports.getById = async (req, res) => {
   try {
-    const details = await Details.findOne({ productId: req.params.id })
+    const details = await Details.findOne({ productId: req.params.id }).lean()
     res.json(details)
   } catch (e) {
     res.status(500).json(e)

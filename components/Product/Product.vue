@@ -5,11 +5,12 @@
         <div class="col-6 col-lg-3">
           <figure class="product-media">
             <span class="product-label label-new">New</span>
-            <a href="#" @click.prevent="showProduct">
+            <a style="cursor: pointer" @click="showProduct(product._id)">
               <img
+
                 :src="product.details[0].photo[0].location"
-                alt="Product image"
                 class="product-image"
+                alt="image"
               >
             </a>
           </figure>
@@ -44,10 +45,13 @@
           <div class="product-body product-action-inner">
             <a href="#" class="btn-product btn-wishlist" title="Add to wishlist"><span>add to wishlist</span></a>
             <div v-for="category in product.category" :key="category._id" class="product-cat">
-              <a style="text-transform: capitalize" href="#">{{ category.title }}</a>
+              <a style="text-transform: capitalize">{{ category.title }}</a>
             </div>
             <h3 class="product-title">
-              <a style="text-transform: capitalize" href="#">{{ product.title }}</a>
+              <a
+                style="text-transform: capitalize; cursor: pointer"
+                @click="showProduct(product._id)"
+              >{{ product.title }}</a>
             </h3>
 
             <div class="product-content">
@@ -55,14 +59,16 @@
             </div>
 
             <div class="product-nav product-nav-thumbs">
-              <a v-for="details in product.details" :key="details._id" class="active">
-                <img
-                  style="width: 40px; height: 40px;object-fit: cover;cursor: pointer"
-                  :src="details.photo[0].location"
-                  alt="product desc"
-                  @click="previewPhoto(details.photo[0],product.details[0].photo[0])"
-                >
-              </a>
+              <div v-for="details in product.details" :key="details._id">
+                <a v-if="details.photo[1]" class="active">
+                  <img
+                    style="width: 40px; height: 40px;object-fit: cover;cursor: pointer"
+                    :src="details.photo[1].location"
+                    alt="product desc"
+                    @click="setPreview(details.photo[1].location,product.details[0].photo[0])"
+                  >
+                </a>
+              </div>
             </div>
           </div>
         </div>
@@ -80,18 +86,29 @@ export default {
       required: true
     }
   },
-  mounted () {
-    console.log(this.products)
+
+  data () {
+    return {
+      previewPhoto: []
+    }
   },
+
+  mounted () {
+    this.products.forEach((product) => {
+      this.previewPhoto.push(product.details[0].photo[0].location)
+    })
+    this.products.forEach((prod) => {
+      prod.details.unshift({ photo: [{ location: this.previewPhoto.shift() }] })
+    })
+  },
+
   methods: {
-    showProduct () {
-      const id = 'test-id'
-      this.$router.push(`/product/${id}`)
+    setPreview (photo, preview) {
+      preview.location = photo
     },
-    previewPhoto (clickPhoto, preview) {
-      const originalPreview = preview.location
-      preview.location = clickPhoto.location
-      clickPhoto.location = originalPreview
+
+    showProduct (id) {
+      this.$router.push(`/product/${id}`)
     }
   }
 }
