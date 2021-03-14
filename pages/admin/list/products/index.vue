@@ -24,6 +24,13 @@
         <template #cell(date)="data">
           {{ data.item.date | date }}
         </template>
+        <template #cell(category)="products">
+          <div v-for="product in products" :key="product._id">
+            <div v-for="category in product.category" :key="category._id">
+              {{ category.title }}
+            </div>
+          </div>
+        </template>
       </b-table>
     </no-ssr>
   </section>
@@ -50,15 +57,14 @@ export default {
     return {
       fields: [
         {
-          key: 'categoryName',
-          sortable: true
-        },
-        {
           key: 'sex',
           sortable: true
         },
         {
           key: 'title'
+        },
+        {
+          key: 'category'
         },
         {
           key: 'price',

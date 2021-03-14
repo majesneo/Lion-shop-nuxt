@@ -21,8 +21,6 @@
     <b-card class="mt-2 text-center" no-body>
       <b-tabs card>
         <app-edit-product
-          :colors-product="colorsProduct"
-          :photos-product="photosProduct"
           :product="product"
           :product-details="productDetails"
           @setNewPhoto="setNewPhoto"
@@ -30,6 +28,7 @@
           @deleteAllPhoto="deleteAllPhoto"
         />
         <app-edit-product-add-color
+          :product="product"
           @setNewPhoto="setNewPhoto"
           @deletePhoto="deletePhoto"
           @deleteAllPhoto="deleteAllPhoto"
@@ -53,12 +52,9 @@ export default {
   },
   async asyncData ({ store, params }) {
     const product = await store.dispatch('products/getProductById', params.id)
-    const productDetails = await store.dispatch('products/getProductDetailsById', params.id)
     return {
-      productDetails,
       product,
-      photosProduct: productDetails.photo,
-      colorsProduct: productDetails.color
+      productDetails: product.details
     }
   },
   methods: {

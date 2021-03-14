@@ -4,22 +4,24 @@ const productSchema = new Schema({
   brand: String,
   title: String,
   description: String,
-  category: {
-    type: Schema.Types.ObjectId,
-    ref: 'category'
-  },
-  categoryName: {
-    type: String,
-    required: true
-  },
-  reviews: {
-    type: Schema.Types.ObjectId,
-    ref: 'reviews'
-  },
-  details: {
-    type: Schema.Types.ObjectId,
-    ref: 'details'
-  },
+  category: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'category'
+    }
+  ],
+  reviews: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'reviews'
+    }
+  ],
+  details: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'details'
+    }
+  ],
   sex: String,
   price: Number,
 

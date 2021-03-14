@@ -15,7 +15,15 @@ export default {
   },
   watch: {
     error (message) {
-      this.makeToast('b-toaster-top-center', 'danger', message.response.data.error.message || message)
+      const currentMessage = message.message || message.response.data.error.message
+      try {
+        this.makeToast(
+          'b-toaster-top-center',
+          'danger',
+          currentMessage)
+      } catch (e) {
+
+      }
     }
   }
 

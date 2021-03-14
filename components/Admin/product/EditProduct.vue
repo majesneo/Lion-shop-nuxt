@@ -1,51 +1,55 @@
 <template>
   <section>
     <b-tab
-      v-for="color in colorsProduct"
-      :key="color"
+      v-for="details in productDetails"
+      :key="details._id"
       no-body
-      :title="color"
+      :title="String(details.color)"
     >
-      <p
-        v-if="$v.newTitle.$dirty && !$v.newTitle.required"
-        class="text-danger"
-      >
-        Title is required
-      </p>
-      <b-form-input
-        v-model="$v.newTitle.$model"
-        style="width: 30%;text-transform: capitalize"
-        :placeholder="`Title: ${product.title}`"
-        class="text-center mt-1 ml-auto mr-auto"
-      />
-      <div v-if="photosProduct.length === 0">
+      <div v-if="details.photo.length === 0">
         <b-spinner type="grow" label="Add photo..." />
         Add a photo
       </div>
       <b-card-img
-        v-for="photo in photosProduct"
+        v-for="photo in details.photo"
         :key="photo.key"
         :src="photo.location"
         class="d-inline text-center close"
         alt="Add Photo"
-        style="width: 250px;height: 400px;float: none;cursor: pointer"
-        @click="$emit('deletePhoto', photo.location,photosProduct,newPhoto)"
+        style="width: 280px;height: 450px;float: none;cursor: pointer"
+        @click="$emit('deletePhoto', photo.location,details.photo,newPhoto)"
       />
       <b-form @submit.prevent="updateProduct">
         <b-card-footer class="mt-1 d-flex flex-column justify-content-center align-items-center">
+          <p
+            v-if="$v.newTitle.$dirty && !$v.newTitle.required"
+            class="text-danger"
+          >
+            Title is required
+          </p>
+          <b-form-input
+            v-model="$v.newTitle.$model"
+            style="width: 30%;text-transform: capitalize"
+            :placeholder="`Title: ${product.title}`"
+            class="text-center mt-1 ml-auto mr-auto"
+          />
           <div class="d-flex">
             <p
               v-if="$v.newSize.$dirty && !$v.newSize.required"
-              class="text-danger d-block"
+              class="text-danger"
             >
               Size is required
             </p>
-            <b-form-input
+            <b-form-select
               v-model="$v.newSize.$model"
-              :placeholder="`Size: ${productDetails.size}`"
-              class="text-center"
-            />
-
+              :options="size"
+              class="mb-2"
+              style="height: 40px"
+            >
+              <b-form-select-option :value="null" disabled>
+                {{ details.size }}
+              </b-form-select-option>
+            </b-form-select>
             <p
               v-if="$v.newQuantity.$dirty && !$v.newQuantity.required"
               class="text-danger"
@@ -54,7 +58,7 @@
             </p>
             <b-form-input
               v-model="$v.newQuantity.$model"
-              :placeholder="`Quantity: ${productDetails.quantity}`"
+              :placeholder="`Quantity: ${details.quantity}`"
               type="number"
               class="text-center"
             />
@@ -84,6 +88,12 @@
             />
           </div>
           <div style="width: 40%">
+            <p
+              v-if="$v.newDescription.$dirty && !$v.newDescription.required"
+              class="text-danger"
+            >
+              Description is required
+            </p>
             <b-form-textarea
               id="textarea"
               v-model="$v.newDescription.$model"
@@ -103,7 +113,7 @@
               :state="Boolean(newPhoto)"
               placeholder="Add a new photos or drop it here..."
               drop-placeholder="Drop file here..."
-              @change="dropFileHandler"
+              @change="dropFileHandler($event,details.photo)"
             />
             <b-overlay
               :show="busy"
@@ -116,7 +126,7 @@
               <b-button
                 variant="primary"
                 type="submit"
-                class="btn btn-outline-primary-2 mt-2 mb-3"
+                class="btn btn-outline-primary-2 mt-2 mb-1"
               >
                 <span>Update product</span>
                 <i class="icon-long-arrow-right" />
@@ -139,20 +149,12 @@ export default {
   middleware: 'auth-admin',
   mixins: [mixinToast],
   props: {
-    photosProduct: {
-      type: Array,
-      required: true
-    },
-    colorsProduct: {
-      type: Array,
-      required: true
-    },
     product: {
       type: Object,
       required: true
     },
     productDetails: {
-      type: Object,
+      type: Array,
       required: true
     }
   },
@@ -167,8 +169,20 @@ export default {
       newTitle: null,
       newDescription: null,
       busy: false,
-      updatePhoto: []
+      updatePhoto: [],
+      size: [
+        { value: 'XS', text: 'XS' },
+        { value: 'S', text: 'S' },
+        { value: 'M', text: 'M' },
+        { value: 'L', text: 'L' },
+        { value: 'XL', text: 'XL' },
+        { value: 'XXL', text: 'XXL' }
+      ]
     }
+  },
+  mounted () {
+    console.dir(this.product)
+    console.dir(this.productDetails)
   },
 
   methods: {
@@ -197,23 +211,23 @@ export default {
     getUpdatedData () {
       return {
         id: this.product._id,
-        title: this.newTitle,
+        title: this.newTitle.toLowerCase(),
         price: this.newPrice,
-        brand: this.newBrand,
+        brand: this.newBrand.toLowerCase(),
         description: this.newDescription
       }
     },
     getUpdatedDataDetails () {
-      return {
-        id: this.productDetails._id,
-        photo: this.newPhoto,
-        size: this.newSize,
-        quantity: this.newQuantity
-      }
+      const data = new FormData()
+      data.append('id', this.productDetails._id)
+      data.append('photo', this.newPhoto)
+      data.append('size', this.newSize)
+      data.append('quantity', this.newQuantity)
+      return data
     },
-    dropFileHandler (e) {
-      this.$emit('deleteAllPhoto', this.photosProduct)
-      this.$emit('setNewPhoto', e, this.photosProduct)
+    dropFileHandler (e, detailsPhoto) {
+      this.$emit('deleteAllPhoto', detailsPhoto)
+      this.$emit('setNewPhoto', e, detailsPhoto)
     }
   },
   validations: {

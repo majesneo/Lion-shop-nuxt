@@ -1,4 +1,5 @@
 const Details = require('../../models/product/details.model')
+const Product = require('../../models/product/product.model')
 
 module.exports.create = async (req, res) => {
   try {
@@ -10,8 +11,12 @@ module.exports.create = async (req, res) => {
       productId: req.body.productId
     })
     await details.save()
+    const product = await Product.findById(req.body.productId)
+    product.details.push(details._id)
+    await product.save()
     res.status(201).json(details)
   } catch (e) {
+    console.log(e)
     res.status(500).json(e)
   }
 }

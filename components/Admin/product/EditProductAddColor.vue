@@ -7,7 +7,7 @@
       </div>
       <b-card-img
         v-for="image in preview"
-        :key="image"
+        :key="image.location"
         class="d-inline text-center close"
         style="width: 250px;height: 400px;cursor: pointer; float: none"
         bottom
@@ -18,6 +18,18 @@
       <b-card-footer class="mt-1 d-flex flex-column justify-content-center align-items-center">
         <div class="d-flex">
           <p
+            v-if="$v.addSize.$dirty && !$v.addSize.required"
+            class="text-danger"
+          >
+            Size is required
+          </p>
+          <b-form-select
+            v-model="$v.addSize.$model"
+            :options="size"
+            class="mb-2"
+            style="height: 40px"
+          />
+          <p
             v-if="$v.addColor.$dirty && !$v.addColor.required"
             class="text-danger"
           >
@@ -26,17 +38,6 @@
           <b-form-input
             v-model="$v.addColor.$model"
             placeholder="Enter color"
-            class="text-center"
-          />
-          <p
-            v-if="$v.addSize.$dirty && !$v.addSize.required"
-            class="text-danger"
-          >
-            Size is required
-          </p>
-          <b-form-input
-            v-model="$v.addSize.$model"
-            placeholder="Enter size"
             class="text-center"
           />
           <p
@@ -79,7 +80,7 @@
           <b-button
             variant="primary"
             type="submit"
-            class="btn btn-outline-primary-2 mt-2 mb-3"
+            class="btn btn-outline-primary-2 mt-2 mb-1"
           >
             <span>Add color</span>
             <i class="icon-long-arrow-right" />
@@ -99,14 +100,29 @@ export default {
   layout: 'admin',
   middleware: 'auth-admin',
   mixins: [mixinToast],
+  props: {
+    product: {
+      type: Object,
+      required: true
+    }
+  },
   data () {
     return {
       addPhoto: [],
       addColor: null,
-      addSize: null,
       addQuantity: null,
       busy: false,
-      preview: []
+      preview: [],
+      addSize: null,
+      size: [
+        { value: null, text: 'Select size' },
+        { value: 'XS', text: 'XS' },
+        { value: 'S', text: 'S' },
+        { value: 'M', text: 'M' },
+        { value: 'L', text: 'L' },
+        { value: 'XL', text: 'XL' },
+        { value: 'XXL', text: 'XXL' }
+      ]
     }
   },
   methods: {
@@ -118,8 +134,7 @@ export default {
       } else {
         this.busy = true
         try {
-          const color = this.getDataAddColor()
-          await this.$store.dispatch('products/addColorProduct', color)
+          await this.$store.dispatch('products/addColorProduct', this.getDataColor())
           const message = `Color ${this.addColor} added`
           this.makeToast('b-toaster-top-center', 'success', message)
           await this.$router.push('/admin/list/products')
@@ -130,14 +145,16 @@ export default {
         }
       }
     },
-    getDataAddColor () {
-      return {
-        productId: this.productDetails.productId,
-        color: this.addColor,
-        photo: this.addPhoto,
-        size: this.addSize,
-        quantity: this.addQuantity
-      }
+    getDataColor () {
+      const data = new FormData()
+      data.append('productId', this.product._id)
+      data.append('color', this.addColor.toLowerCase())
+      data.append('size', this.addSize)
+      data.append('quantity', this.addQuantity)
+      this.addPhoto.forEach((image) => {
+        data.append('photo', image, image.name)
+      })
+      return data
     },
     dropFileHandler (e) {
       this.$emit('deleteAllPhoto', this.preview)

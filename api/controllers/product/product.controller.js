@@ -20,8 +20,12 @@ module.exports.create = async (req, res) => {
 
 module.exports.getAll = async (req, res) => {
   try {
-    const products = await Product.find()
-    res.json(products)
+    await Product.find()
+      .populate('category')
+      .lean()
+      .exec((err, product) => {
+        res.json(product)
+      })
   } catch (e) {
     res.status(500).json(e)
   }
@@ -29,8 +33,13 @@ module.exports.getAll = async (req, res) => {
 
 module.exports.getById = async (req, res) => {
   try {
-    const product = await Product.findById(req.params.id)
-    res.json(product)
+    await Product.findById(req.params.id)
+      .populate('category')
+      .populate('details')
+      .lean()
+      .exec((err, product) => {
+        res.json(product)
+      })
   } catch (e) {
     res.status(500).json(e)
   }

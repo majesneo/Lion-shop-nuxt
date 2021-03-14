@@ -37,7 +37,7 @@
         v-if="$v.title.$dirty && !$v.title.required"
         class="text-danger"
       >
-        Ttitle is required
+        Title is required
       </p>
       <b-form-input
         v-model.trim="$v.title.$model"

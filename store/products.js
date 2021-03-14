@@ -41,8 +41,6 @@ export const actions = {
     }
   },
   async updateProduct ({ commit }, { id }, updatedData) {
-    console.log(id)
-    console.log(updatedData)
     try {
       return await this.$axios.$get(`api/product/details/${id}`, updatedData)
     } catch (e) {
@@ -58,9 +56,9 @@ export const actions = {
       throw e
     }
   },
-  async addColorProduct ({ commit }, id) {
+  async addColorProduct ({ commit }, color) {
     try {
-      return await this.$axios.$get(`api/product/details/${id}`)
+      return await this.$axios.$post('api/product/details/create', color)
     } catch (e) {
       commit('setError', e, { root: true })
       throw e

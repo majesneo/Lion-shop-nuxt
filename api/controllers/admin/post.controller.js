@@ -22,7 +22,7 @@ module.exports.create = async (req, res) => {
 
 module.exports.getAll = async (req, res) => {
   try {
-    const posts = await Post.find().sort({ date: -1 })
+    const posts = await Post.find().sort({ date: -1 }).lean()
     res.json(posts)
   } catch (e) {
     res.status(500).json(e)
@@ -31,9 +31,10 @@ module.exports.getAll = async (req, res) => {
 
 module.exports.getById = async (req, res) => {
   try {
-    await Post.findById(req.params.id).populate('comments').exec((error, post) => {
-      res.json(post)
-    })
+    await Post.findById(req.params.id)
+      .populate('comments').lean().exec((error, post) => {
+        res.json(post)
+      })
   } catch (e) {
     res.status(500).json(e)
   }
