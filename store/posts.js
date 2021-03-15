@@ -46,7 +46,7 @@ export const actions = {
     formData.append('tag', tag)
     formData.append('author', author)
     formData.append('content', content)
-    formData.append('image', image, image.name)
+    formData.append('photo', image, image.name)
 
     try {
       return await this.$axios.$post('/api/post/admin', formData)

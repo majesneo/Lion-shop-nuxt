@@ -3,7 +3,7 @@
     <article class="entry entry-mask">
       <figure class="entry-media">
         <a href="#" @click.prevent="showPost">
-          <img class="entry-img" :src="post.imageURL" alt="image desc">
+          <img class="entry-img" :src="post.imageURL.location" alt="image desc">
         </a>
       </figure>
       <div class="entry-body">

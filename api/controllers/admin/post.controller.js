@@ -2,12 +2,13 @@ const Post = require('../../models/admin/post.model')
 const Comment = require('../../models/admin/comment.model')
 
 module.exports.create = async (req, res) => {
+  console.log(req)
   const post = new Post({
     title: req.body.title,
     content: req.body.content,
     author: req.body.author,
     tag: req.body.tag,
-    imageURL: `/${req.file.filename}`
+    imageURL: req.file
   })
   try {
     await post.save()

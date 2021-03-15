@@ -7,7 +7,7 @@ const upload = require('../../middleware/upload')
 router.post(
   '/admin',
   passport.authenticate('jwt', { session: false }),
-  upload.single('image'),
+  upload.single('photo'),
   postController.create
 )
 
