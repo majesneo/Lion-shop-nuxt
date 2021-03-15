@@ -70,7 +70,7 @@
             </p>
             <b-form-input
               v-model="$v.newBrand.$model"
-              :placeholder="`Brand: ${product.brand}`"
+              :placeholder="`${product.brand}`"
               class="text-center"
               style="text-transform: capitalize"
             />

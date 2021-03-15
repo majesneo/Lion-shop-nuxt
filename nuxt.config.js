@@ -30,7 +30,8 @@ export default {
     '@/plugins/bootstrap',
     '@/plugins/vuelidate',
     '@/plugins/axios',
-    '@/plugins/dateFilter'
+    '@/plugins/dateFilter',
+    { src: '@/plugins/productZoomer', mode: 'client' }
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
